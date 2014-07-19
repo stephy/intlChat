@@ -36,6 +36,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Custom initialization
+    // First initial view is the chats view
+    ChatsViewController *chats = [[ChatsViewController alloc] initWithNibName:@"ChatsViewController" bundle:nil];
+    [self.viewContainer addSubview:chats.view];
+    [self addChildViewController:chats];
 }
 
 - (void)didReceiveMemoryWarning
