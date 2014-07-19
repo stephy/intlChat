@@ -25,33 +25,33 @@ Schema
 ======
 
 User (Friend)
- userid
- fullname
- email
- language
- password
+ - userid
+ - fullname
+ - email
+ - language
+ - password
 
 Friends
- userId
- friendId
+ - userId
+ - friendId
 
 Chats
- chatId
- userId
+ - chatId
+ - userId
 
 Messages
- chatId
- messageSequence
- originalMessage
- translatedMessage
+ - chatId
+ - messageSequence
+ - originalMessage
+ - translatedMessage
 
 
 
 Relationships 
 ==============
-User 1:MANY Friends (Users) 
-Users 1:MANY Chats
-Chats 1:MANY Messages
+ - User 1:MANY Friends (Users)
+ - Users 1:MANY Chats
+ - Chats 1:MANY Messages
 
 
 
