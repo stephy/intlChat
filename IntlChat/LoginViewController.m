@@ -41,7 +41,9 @@
 
 - (IBAction)onLoginButton:(id)sender {
     MainViewController *mvc = [[MainViewController alloc] init];
-    [self presentViewController:mvc animated:YES completion:nil];
+    UINavigationController *navBar = [[UINavigationController alloc] initWithRootViewController:mvc];
+    
+    [self presentViewController:navBar animated:YES completion:nil];
 }
 
 - (IBAction)onSignUpButton:(id)sender {

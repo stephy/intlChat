@@ -8,6 +8,7 @@
 
 #import "ChatsViewController.h"
 #import "ChatCell.h"
+#import "ChatViewController.h"
 
 @interface ChatsViewController ()
 @property (nonatomic, strong) NSArray *chats;
@@ -67,8 +68,13 @@
 
 //on row click open detailed view
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //dismiss keyboard
+    NSLog(@"hllo");
+    NSDictionary *chat = [self.chats objectAtIndex:indexPath.row];
     
-    
+    ChatViewController *cvc = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
+    cvc.chat = chat;
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 
 
