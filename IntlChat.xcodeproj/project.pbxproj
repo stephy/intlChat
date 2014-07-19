@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		974798C4197A64F700D14F88 /* Blue-1536x2048.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */; };
 		979E14011978D94200120CDD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14001978D94200120CDD /* Foundation.framework */; };
 		979E14031978D94200120CDD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14021978D94200120CDD /* CoreGraphics.framework */; };
 		979E14051978D94200120CDD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14041978D94200120CDD /* UIKit.framework */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Blue-1536x2048.jpg"; path = "assets/Blue-1536x2048.jpg"; sourceTree = "<group>"; };
 		979E13FD1978D94200120CDD /* IntlChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntlChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979E14001978D94200120CDD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		979E14021978D94200120CDD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -167,6 +169,7 @@
 		979E14081978D94200120CDD /* IntlChat */ = {
 			isa = PBXGroup;
 			children = (
+				974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */,
 				979E145B197A4E2000120CDD /* 734-chat.png */,
 				979E145C197A4E2000120CDD /* 734-chat@2x.png */,
 				979E145D197A4E2000120CDD /* 769-male.png */,
@@ -350,6 +353,7 @@
 				979E146B197A5BA700120CDD /* ChatCell.xib in Resources */,
 				979E14181978D94200120CDD /* Images.xcassets in Resources */,
 				979E1464197A4E2000120CDD /* 769-male@2x.png in Resources */,
+				974798C4197A64F700D14F88 /* Blue-1536x2048.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +579,7 @@
 				979E14311978D94300120CDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		979E14321978D94300120CDD /* Build configuration list for PBXNativeTarget "IntlChatTests" */ = {
 			isa = XCConfigurationList;
@@ -583,6 +588,7 @@
 				979E14341978D94300120CDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

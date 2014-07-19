@@ -23,6 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[UITextField appearance] setTintColor:[UIColor whiteColor]];
     }
     return self;
 }
