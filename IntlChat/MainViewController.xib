@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccl-S4-Oad">
                     <rect key="frame" x="0.0" y="147" width="320" height="421"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.88143296298881924" green="1" blue="0.7357241632582624" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.51317362882653061" green="0.50125242525030111" blue="0.49288067538783792" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="32N-yK-nbw"/>
                         <constraint firstAttribute="height" constant="421" id="Cfd-25-VMZ"/>
@@ -59,7 +59,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.85529853792435917" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.47749920280612246" green="0.46640672867186939" blue="0.45861695994474383" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="Ndm-FT-5Ah"/>
                         <constraint firstAttribute="height" constant="55" id="tp9-j4-NIl"/>

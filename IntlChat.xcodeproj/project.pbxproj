@@ -45,6 +45,8 @@
 		979E1466197A4E2000120CDD /* 779-users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 979E1460197A4E2000120CDD /* 779-users@2x.png */; };
 		979E146A197A5BA700120CDD /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 979E1468197A5BA700120CDD /* ChatCell.m */; };
 		979E146B197A5BA700120CDD /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 979E1469197A5BA700120CDD /* ChatCell.xib */; };
+		97DB3313197C731D00269951 /* thumb-bruce-wayne.png in Resources */ = {isa = PBXBuildFile; fileRef = 97DB3312197C731D00269951 /* thumb-bruce-wayne.png */; };
+		9F8ED5B1B6504AD3ADBD6F78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86E74D666DEF4BF7BE0D861F /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CB933D374A54E1292D2C8F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		86E74D666DEF4BF7BE0D861F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Blue-1536x2048.jpg"; path = "assets/Blue-1536x2048.jpg"; sourceTree = "<group>"; };
 		979E13FD1978D94200120CDD /* IntlChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntlChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979E14001978D94200120CDD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -107,6 +111,7 @@
 		979E1467197A5BA700120CDD /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		979E1468197A5BA700120CDD /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		979E1469197A5BA700120CDD /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
+		97DB3312197C731D00269951 /* thumb-bruce-wayne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thumb-bruce-wayne.png"; path = "assets/thumb-bruce-wayne.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +123,7 @@
 				979E14071978D94200120CDD /* CoreData.framework in Frameworks */,
 				979E14051978D94200120CDD /* UIKit.framework in Frameworks */,
 				979E14011978D94200120CDD /* Foundation.framework in Frameworks */,
+				9F8ED5B1B6504AD3ADBD6F78 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +148,7 @@
 				979E14251978D94300120CDD /* IntlChatTests */,
 				979E13FF1978D94200120CDD /* Frameworks */,
 				979E13FE1978D94200120CDD /* Products */,
+				0CB933D374A54E1292D2C8F0 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +169,7 @@
 				979E14041978D94200120CDD /* UIKit.framework */,
 				979E14061978D94200120CDD /* CoreData.framework */,
 				979E141E1978D94300120CDD /* XCTest.framework */,
+				86E74D666DEF4BF7BE0D861F /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,6 +177,7 @@
 		979E14081978D94200120CDD /* IntlChat */ = {
 			isa = PBXGroup;
 			children = (
+				97DB3312197C731D00269951 /* thumb-bruce-wayne.png */,
 				974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */,
 				979E145B197A4E2000120CDD /* 734-chat.png */,
 				979E145C197A4E2000120CDD /* 734-chat@2x.png */,
@@ -269,9 +278,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 979E142F1978D94300120CDD /* Build configuration list for PBXNativeTarget "IntlChat" */;
 			buildPhases = (
+				1424EC18595C4CB5B59369E1 /* Check Pods Manifest.lock */,
 				979E13F91978D94200120CDD /* Sources */,
 				979E13FA1978D94200120CDD /* Frameworks */,
 				979E13FB1978D94200120CDD /* Resources */,
+				C08E6566E8494FF8AFAD8DD2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -340,6 +351,7 @@
 				979E1466197A4E2000120CDD /* 779-users@2x.png in Resources */,
 				979E1465197A4E2000120CDD /* 779-users.png in Resources */,
 				979E14501978DA9700120CDD /* ProfileViewController.xib in Resources */,
+				97DB3313197C731D00269951 /* thumb-bruce-wayne.png in Resources */,
 				979E1463197A4E2000120CDD /* 769-male.png in Resources */,
 				979E14461978D9C100120CDD /* LoginViewController.xib in Resources */,
 				979E14411978D9A100120CDD /* FriendsViewController.xib in Resources */,
@@ -366,6 +378,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1424EC18595C4CB5B59369E1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C08E6566E8494FF8AFAD8DD2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		979E13F91978D94200120CDD /* Sources */ = {
@@ -496,6 +541,7 @@
 		};
 		979E14301978D94300120CDD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CB933D374A54E1292D2C8F0 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -509,6 +555,7 @@
 		};
 		979E14311978D94300120CDD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CB933D374A54E1292D2C8F0 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
