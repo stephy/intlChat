@@ -8,6 +8,7 @@
 
 #import "ChatViewController.h"
 #import "MessageCell.h"
+#import "MessageViewController.h"
 
 @interface ChatViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -63,12 +64,9 @@
 
 //on row click open detailed view
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-//    NSDictionary *chat = [self.chats objectAtIndex:indexPath.row];
-//    
-//    ChatViewController *cvc = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
-//    cvc.chat = chat;
-//    [self.navigationController pushViewController:cvc animated:YES];
+ 
+    MessageViewController *mvc = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 
 
