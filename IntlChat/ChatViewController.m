@@ -7,8 +7,12 @@
 //
 
 #import "ChatViewController.h"
+#import "MessageCell.h"
 
 @interface ChatViewController ()
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)onSendButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *messageField;
 
 @end
 
@@ -27,6 +31,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //load personalized cell
+    //registration process
+    [self.tableView registerNib:[UINib nibWithNibName:@"MessageCell" bundle:nil] forCellReuseIdentifier:@"MessageCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +41,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)onSendButton:(id)sender {
+}
+
+- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //return the number of rows you want in this table view
+    return 10;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+    
+    cell.usernameLabel.text = @"username";
+    cell.messageLabel.text = @"my cool message";
+    
+    return cell;
+}
+
+//on row click open detailed view
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+//    NSDictionary *chat = [self.chats objectAtIndex:indexPath.row];
+//    
+//    ChatViewController *cvc = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
+//    cvc.chat = chat;
+//    [self.navigationController pushViewController:cvc animated:YES];
+}
+
 
 @end
