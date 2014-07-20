@@ -9,6 +9,8 @@
 #import "MessageViewController.h"
 
 @interface MessageViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *originalMessageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *translatedMessageText;
 
 @end
 

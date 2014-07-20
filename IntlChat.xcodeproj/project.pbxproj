@@ -50,6 +50,8 @@
 		97DB3318197C858100269951 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DB3316197C858100269951 /* MessageCell.xib */; };
 		97DB331C197C86C100269951 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DB331A197C86C100269951 /* MessageViewController.m */; };
 		97DB331D197C86C100269951 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DB331B197C86C100269951 /* MessageViewController.xib */; };
+		97DB3321197C89BA00269951 /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DB331F197C89BA00269951 /* FriendCell.m */; };
+		97DB3322197C89BA00269951 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DB3320197C89BA00269951 /* FriendCell.xib */; };
 		9F8ED5B1B6504AD3ADBD6F78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86E74D666DEF4BF7BE0D861F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +124,9 @@
 		97DB3319197C86C100269951 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		97DB331A197C86C100269951 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		97DB331B197C86C100269951 /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		97DB331E197C89BA00269951 /* FriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCell.h; sourceTree = "<group>"; };
+		97DB331F197C89BA00269951 /* FriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCell.m; sourceTree = "<group>"; };
+		97DB3320197C89BA00269951 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				97DB331B197C86C100269951 /* MessageViewController.xib */,
+				97DB3320197C89BA00269951 /* FriendCell.xib */,
 				97DB3316197C858100269951 /* MessageCell.xib */,
 				979E1469197A5BA700120CDD /* ChatCell.xib */,
 				979E14531978DBBC00120CDD /* ChatViewController.xib */,
@@ -256,6 +262,8 @@
 		979E143B1978D96C00120CDD /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				97DB331E197C89BA00269951 /* FriendCell.h */,
+				97DB331F197C89BA00269951 /* FriendCell.m */,
 				97DB3319197C86C100269951 /* MessageViewController.h */,
 				97DB331A197C86C100269951 /* MessageViewController.m */,
 				97DB3314197C858100269951 /* MessageCell.h */,
@@ -374,6 +382,7 @@
 				979E14411978D9A100120CDD /* FriendsViewController.xib in Resources */,
 				97DB3318197C858100269951 /* MessageCell.xib in Resources */,
 				979E14391978D95D00120CDD /* ChatsViewController.xib in Resources */,
+				97DB3322197C89BA00269951 /* FriendCell.xib in Resources */,
 				979E1461197A4E2000120CDD /* 734-chat.png in Resources */,
 				979E145A1978E1AA00120CDD /* MainViewController.xib in Resources */,
 				979E140D1978D94200120CDD /* InfoPlist.strings in Resources */,
@@ -440,6 +449,7 @@
 				97DB331C197C86C100269951 /* MessageViewController.m in Sources */,
 				979E144F1978DA9700120CDD /* ProfileViewController.m in Sources */,
 				979E14591978E1AA00120CDD /* MainViewController.m in Sources */,
+				97DB3321197C89BA00269951 /* FriendCell.m in Sources */,
 				979E14451978D9C100120CDD /* LoginViewController.m in Sources */,
 				979E146A197A5BA700120CDD /* ChatCell.m in Sources */,
 				979E14131978D94200120CDD /* AppDelegate.m in Sources */,
