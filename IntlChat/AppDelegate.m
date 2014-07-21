@@ -12,6 +12,8 @@
 
 #import <Parse/Parse.h>
 
+#import "User.h"
+
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -25,16 +27,9 @@
     LoginViewController *lvc = [[LoginViewController alloc] init];
     self.window.rootViewController = lvc;
     
-    // Setup Parse with locally stored keys
-    //    NSLog(@"%@", [[NSBundle mainBundle] infoDictionary]);
-    NSLog(@"ParseProdAppID = '%@'; ParseProdClientKey = '%@'",
-      [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"],
-      [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdClientKey"]);
-
-    [Parse setApplicationId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"]
-                  clientKey:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdClientKey"]];
+    [self setupParse];
     
-    self.window.backgroundColor = [UIColor whiteColor];
+     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -79,6 +74,19 @@
             abort();
         } 
     }
+}
+
+- (void) setupParse {
+    // Register all model PFObject subclasses here.
+    [User registerSubclass];
+    
+    // Init Parse library
+    [Parse setApplicationId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"]
+                  clientKey:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdClientKey"]];
+    NSLog(@"ParseProdAppID = '%@'; ParseProdClientKey = '%@'",
+          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"],
+          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdClientKey"]);
+    
 }
 
 #pragma mark - Core Data stack

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64687943197CDB5500D3B274 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 64687942197CDB5500D3B274 /* User.m */; };
 		974798C4197A64F700D14F88 /* Blue-1536x2048.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */; };
 		979E14011978D94200120CDD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14001978D94200120CDD /* Foundation.framework */; };
 		979E14031978D94200120CDD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14021978D94200120CDD /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 
 /* Begin PBXFileReference section */
 		0CB933D374A54E1292D2C8F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		64687941197CDB5500D3B274 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		64687942197CDB5500D3B274 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		86E74D666DEF4BF7BE0D861F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Blue-1536x2048.jpg"; path = "assets/Blue-1536x2048.jpg"; sourceTree = "<group>"; };
 		979E13FD1978D94200120CDD /* IntlChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntlChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +162,8 @@
 		646878E6197CAFFE00D3B274 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				64687941197CDB5500D3B274 /* User.h */,
+				64687942197CDB5500D3B274 /* User.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				97DB331C197C86C100269951 /* MessageViewController.m in Sources */,
 				979E144F1978DA9700120CDD /* ProfileViewController.m in Sources */,
 				979E14591978E1AA00120CDD /* MainViewController.m in Sources */,
+				64687943197CDB5500D3B274 /* User.m in Sources */,
 				97DB3321197C89BA00269951 /* FriendCell.m in Sources */,
 				979E14451978D9C100120CDD /* LoginViewController.m in Sources */,
 				979E146A197A5BA700120CDD /* ChatCell.m in Sources */,
