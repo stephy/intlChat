@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64687943197CDB5500D3B274 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 64687942197CDB5500D3B274 /* User.m */; };
 		974798C4197A64F700D14F88 /* Blue-1536x2048.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */; };
 		979E14011978D94200120CDD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14001978D94200120CDD /* Foundation.framework */; };
 		979E14031978D94200120CDD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979E14021978D94200120CDD /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 
 /* Begin PBXFileReference section */
 		0CB933D374A54E1292D2C8F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		64687941197CDB5500D3B274 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		64687942197CDB5500D3B274 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		86E74D666DEF4BF7BE0D861F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		974798C3197A64F700D14F88 /* Blue-1536x2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Blue-1536x2048.jpg"; path = "assets/Blue-1536x2048.jpg"; sourceTree = "<group>"; };
 		979E13FD1978D94200120CDD /* IntlChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntlChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +159,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		646878E6197CAFFE00D3B274 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				64687941197CDB5500D3B274 /* User.h */,
+				64687942197CDB5500D3B274 /* User.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
 		979E13F41978D94200120CDD = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +214,7 @@
 				979E1460197A4E2000120CDD /* 779-users@2x.png */,
 				979E143C1978D98600120CDD /* assets */,
 				979E143B1978D96C00120CDD /* classes */,
+				646878E6197CAFFE00D3B274 /* models */,
 				979E143A1978D96400120CDD /* views */,
 				979E14111978D94200120CDD /* AppDelegate.h */,
 				979E14121978D94200120CDD /* AppDelegate.m */,
@@ -307,6 +320,7 @@
 				979E13FA1978D94200120CDD /* Frameworks */,
 				979E13FB1978D94200120CDD /* Resources */,
 				C08E6566E8494FF8AFAD8DD2 /* Copy Pods Resources */,
+				646878E7197CBBF300D3B274 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -422,6 +436,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		646878E7197CBBF300D3B274 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "# An API keys script written by Patrick Gibson (@patr1ck) and Christopher Bowns (@cbowns)\n# This script sets API keys in your app's Info.plist from an .api_keys file you keep in your home directory (~/.api_keys)\n# This allows you to not check API keys into your source control system,\n# or for different developers to use different keys without needing to patch their working copies.\n\n# Installation directions:\n=begin\n1. Create a Run Script build phase in your Xcode project before Compile Sources\n2. Copy and paste this whole script in.\n3. Create or modify your .api_keys file to hold your API keys\n4. Modify the keys hash below to reference your .api_keys names from step 3\n5. Add placeholder keys to your app's Info.plist for the script to sub into.\n6. Add appropriate code to your app to pull from your Info.plist (see below)\n7. Build your app!\n=end\n\n# Your .api_keys should be in this format: (we recommend changing APPNAME to, well, your app name)\n=begin\nPARSE_APPNAME_PROD_APP_ID=foo\nPARSE_APPNAME_PROD_CLIENT_KEY=bar\nTESTFLIGHT_APPNAME=PartyApp\n=end\n\n# You can move your .api_keys file:\napi_keys_file = \"/Users/#{ENV['USER']}/.api_keys\"\n\n# Declare your app-specific keys' names here, like so:\n# '.api_keys_key' => 'Info.plist_key'\nkeys = {\n    #    'PARSE_APPNAME_DEV_APP_ID' => 'ParseDevAppID',\n    #'PARSE_APPNAME_DEV_CLIENT_KEY' => 'ParseDevClientKey',\n    'PARSE_INTLCHAT_PROD_APP_ID' => 'ParseProdAppID',\n    'PARSE_INTLCHAT_PROD_CLIENT_KEY' => 'ParseProdClientKey',\n    #  'TESTFLIGHT_APPNAME' => 'TestFlightKey',\n}\n\n# A reminder: you need to add keys to your Info.plist so this script can put these values somewhere.\n# In XML, it should look something like:\n=begin\n<key>ParseProdClientKey</key>\n<string>?merp?</string>\n<key>TestFlightKey</key>\n<string>?hmm?</string>\n=end\n\n# Once this script is done running, it should look like:\n=begin\n<key>ParseProdClientKey</key>\n<string>bar</string>\n<key>TestFlightKey</key>\n<string>PartyApp</string>\n=end\n\n# Using these values in code looks something like:\n=begin\n[Parse setApplicationId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@\"ParseDevAppID\"]\nclientKey:[[NSBundle mainBundle] objectForInfoDictionaryKey:@\"ParseDevClientKey\"]];\nor\nNSString *testFlightName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@\"TestFlightKey\"];\n=end\n\n# And now, it's time to do some work.\n\n\n# Fail if not run from Xcode\nraise \"Must be run from Xcode\" unless ENV['XCODE_VERSION_ACTUAL']\n\ninfo_plist = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\n\n# When building for the device, the plist is already converted to binary, so change it back.\n`plutil -convert xml1 #{info_plist}`\n\n# Load our keys from $HOME/.api_keys\napi_keys = IO.readlines(api_keys_file).join\napi_keys.each_line do |line|\n# puts \"line is #{line}\"\nif line.to_s.strip.length != 0 # Skip nil or empty or whitespace lines\nkey, value = line.split(\"=\")\nputs \"Loading #{key} = #{value}\"\nENV[key] = value.strip!\nend\nend\n\n# Open Info.plist and set the appropriate value to the revision hash\nlines = IO.readlines(info_plist).join\nkeys.each do |apikey, infokey|\nlines.gsub! /(<key>#{infokey}<\\/key>\\n\\t<string>).*?(<\\/string>)/, \"\\\\1#{ENV[apikey]}\\\\2\"\nend\n\n# Overwrite the original Info.plist file with our updated version\nFile.open(info_plist, 'w') {|f| f.puts lines}\n\n# Convert back to binary1 if we're building for the device\nif ENV['EFFECTIVE_PLATFORM_NAME'] == \"-iphonesimulator\" then\n`plutil -convert xml1 #{info_plist}`\nelse\n`plutil -convert binary1 #{info_plist}`\nend\n\n# Report to the user\nputs \"Updated the API Keys\"";
+		};
 		C08E6566E8494FF8AFAD8DD2 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,6 +476,7 @@
 				97DB331C197C86C100269951 /* MessageViewController.m in Sources */,
 				979E144F1978DA9700120CDD /* ProfileViewController.m in Sources */,
 				979E14591978E1AA00120CDD /* MainViewController.m in Sources */,
+				64687943197CDB5500D3B274 /* User.m in Sources */,
 				97DB3321197C89BA00269951 /* FriendCell.m in Sources */,
 				979E14451978D9C100120CDD /* LoginViewController.m in Sources */,
 				979E146A197A5BA700120CDD /* ChatCell.m in Sources */,

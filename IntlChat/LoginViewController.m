@@ -9,10 +9,14 @@
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import "MainViewController.h"
+#import "User.h"
 
 @interface LoginViewController ()
 - (IBAction)onLoginButton:(id)sender;
 - (IBAction)onSignUpButton:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UITextField *usernameField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
 
@@ -41,9 +45,20 @@
 }
 
 - (IBAction)onLoginButton:(id)sender {
-    MainViewController *mvc = [[MainViewController alloc] init];
-    UINavigationController *navBar = [[UINavigationController alloc] initWithRootViewController:mvc];
-    [self presentViewController:navBar animated:YES completion:nil];
+    [User logInWithUsernameInBackground:self.usernameField.text
+           password:self.passwordField.text
+           block:^(PFUser *user, NSError *error) {
+               if (user) {
+                   // Do stuff after successful login.
+                   MainViewController *mvc = [[MainViewController alloc] init];
+                   UINavigationController *navBar = [[UINavigationController alloc] initWithRootViewController:mvc];
+                   [self presentViewController:navBar animated:YES completion:nil];
+                   
+               } else {
+                   // The login failed. Check error to see why.
+                   NSLog(@"Login failed: %@", [error description]);
+               }
+           }];
 }
 
 - (IBAction)onSignUpButton:(id)sender {
