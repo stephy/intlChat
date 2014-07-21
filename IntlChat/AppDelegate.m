@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "ChatsViewController.h"
 
+#import <Parse/Parse.h>
+
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -22,6 +24,15 @@
     // Override point for customization after application launch.
     LoginViewController *lvc = [[LoginViewController alloc] init];
     self.window.rootViewController = lvc;
+    
+    // Setup Parse with locally stored keys
+    //    NSLog(@"%@", [[NSBundle mainBundle] infoDictionary]);
+    NSLog(@"ParseProdAppID = '%@'; ParseProdClientKey = '%@'",
+      [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"],
+      [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdClientKey"]);
+
+    [Parse setApplicationId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"]
+                  clientKey:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdClientKey"]];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
