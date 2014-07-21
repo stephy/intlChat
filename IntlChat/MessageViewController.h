@@ -10,4 +10,5 @@
 
 @interface MessageViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary *currentMessage;
 @end

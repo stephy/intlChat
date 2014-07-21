@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.originalMessageLabel.text = self.currentMessage[@"original_message"];
+    self.translatedMessageText.text = self.currentMessage[@"translated_message"];
 }
 
 - (void)didReceiveMemoryWarning

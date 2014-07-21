@@ -10,4 +10,6 @@
 
 @interface ChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSDictionary *chat;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) NSString *currentUser; //needs to change to PF USER?
 @end

@@ -1,4 +1,4 @@
-//
+///Users/steph/dev /workspace/chat/IntlChat/FriendCell.m
 //  FriendCell.m
 //  IntlChat
 //

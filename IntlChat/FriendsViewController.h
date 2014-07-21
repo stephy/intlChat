@@ -10,5 +10,6 @@
 
 @interface FriendsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
+@property (strong, nonatomic) NSArray *friendsList;
 
 @end

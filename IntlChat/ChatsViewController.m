@@ -29,8 +29,8 @@
                         @{ @"buddy"     : @"Daniel Avalone",
                            @"language" : @"Portuguese",
                            @"image_url": @"thumb-bruce-wayne.png" },
-                        @{ @"buddy"     : @"Bruce Wayne",
-                           @"language" : @"English",
+                        @{ @"buddy"     : @"Klaus Alves",
+                           @"language" : @"Portuguese",
                            @"image_url": @"thumb-bruce-wayne.png" },
                        ];
     }
@@ -63,15 +63,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"];
+    self.tableView.backgroundColor =[UIColor clearColor];
+    cell.backgroundColor = [UIColor clearColor];
     
     NSDictionary *chat = [self.chats objectAtIndex:indexPath.row];
-    if ( [chat[@"language"] isEqualToString:@"Portuguese"] ) {
-        //Portuguese green
-        cell.backgroundColor = [UIColor colorWithRed:0 green:0.737 blue:0.122 alpha:1] /*#00bc1f*/;
-    } else {
-        //english blue
-        cell.backgroundColor = [UIColor colorWithRed:0.075 green:0.192 blue:0.635 alpha:1] /*#1331a2*/;
-    }
     cell.friendLabel.text = chat[@"buddy"];
     cell.languageLabel.text = chat[@"language"];
     //UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
