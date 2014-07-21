@@ -43,7 +43,6 @@
 - (IBAction)onLoginButton:(id)sender {
     MainViewController *mvc = [[MainViewController alloc] init];
     UINavigationController *navBar = [[UINavigationController alloc] initWithRootViewController:mvc];
-    
     [self presentViewController:navBar animated:YES completion:nil];
 }
 
