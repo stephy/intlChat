@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSString *lang;
 @property (strong, nonatomic) NSDictionary *pickerOptions;
 @property (strong, nonatomic) NSArray *pickerDisplayOptions;
+- (IBAction)onViewTap:(UITapGestureRecognizer *)sender;
 
 - (IBAction)onSignUpFormButton:(id)sender;
 
@@ -61,6 +62,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onViewTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)onSignUpFormButton:(id)sender {

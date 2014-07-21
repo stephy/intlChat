@@ -102,8 +102,17 @@
                 </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="Rmf-ZU-iaz" appends="YES" id="Yuv-9o-oNP"/>
+            </connections>
         </view>
+        <tapGestureRecognizer id="Rmf-ZU-iaz">
+            <connections>
+                <action selector="onViewTap:" destination="-1" id="tUW-dS-p1g"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
