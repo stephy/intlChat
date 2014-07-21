@@ -59,8 +59,8 @@
                                         <constraint firstAttribute="width" constant="320" id="Op7-S7-ge4"/>
                                     </constraints>
                                 </view>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hGr-sF-jaB">
-                                    <rect key="frame" x="0.0" y="94" width="320" height="425"/>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hGr-sF-jaB">
+                                    <rect key="frame" x="0.0" y="139" width="320" height="380"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -74,21 +74,19 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="wdJ-eC-u1q" secondAttribute="bottom" id="ETy-Cr-VCh"/>
                                 <constraint firstAttribute="trailing" secondItem="wdJ-eC-u1q" secondAttribute="trailing" id="GEi-bU-zFq"/>
-                                <constraint firstAttribute="trailing" secondItem="hGr-sF-jaB" secondAttribute="trailing" id="MfY-uI-SFu"/>
-                                <constraint firstItem="hGr-sF-jaB" firstAttribute="top" secondItem="MJH-o6-66o" secondAttribute="top" constant="94" id="Pwc-eP-QmG"/>
-                                <constraint firstItem="wdJ-eC-u1q" firstAttribute="top" secondItem="hGr-sF-jaB" secondAttribute="bottom" constant="1" id="QsK-RM-5s7"/>
                                 <constraint firstAttribute="width" constant="320" id="S23-XL-DZf"/>
                                 <constraint firstItem="wdJ-eC-u1q" firstAttribute="leading" secondItem="MJH-o6-66o" secondAttribute="leading" id="Ty4-o5-Nqm"/>
-                                <constraint firstItem="hGr-sF-jaB" firstAttribute="leading" secondItem="MJH-o6-66o" secondAttribute="leading" id="knm-nG-pgl"/>
                                 <constraint firstAttribute="height" constant="585" id="voh-Zc-vqn"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="MJH-o6-66o" firstAttribute="top" secondItem="i86-8s-zaa" secondAttribute="top" constant="-19" id="9UE-wy-eUJ"/>
+                        <constraint firstAttribute="height" constant="576" id="FwK-J3-zED"/>
                         <constraint firstItem="MJH-o6-66o" firstAttribute="leading" secondItem="i86-8s-zaa" secondAttribute="leading" constant="5" id="JVn-2G-lO2"/>
                         <constraint firstAttribute="bottom" secondItem="MJH-o6-66o" secondAttribute="bottom" id="elp-5Q-N6a"/>
                         <constraint firstAttribute="trailing" secondItem="MJH-o6-66o" secondAttribute="trailing" constant="9" id="puE-hY-g28"/>
+                        <constraint firstAttribute="width" constant="334" id="puZ-ZN-le8"/>
                     </constraints>
                 </scrollView>
             </subviews>
