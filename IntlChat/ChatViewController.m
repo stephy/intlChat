@@ -55,10 +55,10 @@ int const MESSAGE_BAR_OFFSET = 10;
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageCell" bundle:nil] forCellReuseIdentifier:@"MessageCell"];
     
     //dismiss keyboard
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                          action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                          action:@selector(dismissKeyboard)];
+//    
+//    [self.view addGestureRecognizer:tap];
     //move chat view when keyboard shows
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -121,7 +121,6 @@ int const MESSAGE_BAR_OFFSET = 10;
 
 //on row click open detailed view
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
- 
     MessageViewController *mvc = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:[NSBundle mainBundle]];
     mvc.currentMessage = self.messages[indexPath.row];
     [mvc setTitle:@"Translation"];

@@ -25,12 +25,12 @@
                                 @"language": @"Portuguese"},
                               @{@"username": @"Marissa Mayer",
                                 @"language": @"English"},
-                              @{@"username": @"Barry Bishop",
+                              @{@"username": @"Jason Statham",
                                 @"language": @"English"},
-                              @{@"username": @"Bob Storey",
+                              @{@"username": @"Scarlett Johanson",
                                 @"language": @"English"},
-                              @{@"username": @"Kevin Deng",
-                                @"language": @"Chinese"}];
+                              @{@"username": @"Dawson Lery",
+                                @"language": @"English"}];
     }
     return self;
 }

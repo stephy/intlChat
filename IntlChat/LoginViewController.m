@@ -52,6 +52,7 @@
                if (user) {
                    // Do stuff after successful login.
                    MainViewController *mvc = [[MainViewController alloc] init];
+                   [mvc setTitle:@"Intl Chat"];
                    UINavigationController *navBar = [[UINavigationController alloc] initWithRootViewController:mvc];
                    [self presentViewController:navBar animated:YES completion:nil];
                    
