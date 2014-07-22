@@ -20,12 +20,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sn6-lf-d4O">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="577"/>
+                    <rect key="frame" x="0.0" y="62" width="320" height="515"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="Bp5-cf-ffF"/>
-                        <constraint firstAttribute="height" constant="577" id="MAG-mc-zdP"/>
+                        <constraint firstAttribute="height" constant="515" id="MAG-mc-zdP"/>
                     </constraints>
                     <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -41,7 +41,7 @@
                 <constraint firstAttribute="bottom" secondItem="sn6-lf-d4O" secondAttribute="bottom" constant="-9" id="8LC-77-aO6"/>
                 <constraint firstAttribute="trailing" secondItem="sn6-lf-d4O" secondAttribute="trailing" id="B7D-l3-nQc"/>
                 <constraint firstItem="sn6-lf-d4O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GcC-ho-DW2"/>
-                <constraint firstItem="sn6-lf-d4O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="m5Y-bw-6PP"/>
+                <constraint firstItem="sn6-lf-d4O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="62" id="m5Y-bw-6PP"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

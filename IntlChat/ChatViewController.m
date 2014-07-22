@@ -189,4 +189,8 @@ int const MESSAGE_BAR_OFFSET = 10;
     self.keyboardIsShown = YES;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewAutomaticDimension;
+}
+
 @end
