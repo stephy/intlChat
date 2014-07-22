@@ -14,9 +14,8 @@ int const MESSAGE_BAR_OFFSET = 10;
 
 @interface ChatViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-- (IBAction)onSendButton:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *messageField;
-@property (strong, nonatomic) NSArray *messages;
+@property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) MessageCell *msgCell;
 @property BOOL keyboardIsShown;
 
@@ -30,7 +29,8 @@ int const MESSAGE_BAR_OFFSET = 10;
     if (self) {
         self.currentUser = @"Bruce Wayne";
         // Custom initialization
-        self.messages = @[ @{ @"username": @"Stephani Alves",
+        
+        NSArray *messages = @[ @{ @"username": @"Stephani Alves",
                               @"original_message": @"Oi Tudo bom?",
                               @"translated_message": @"Hi, how are you?" },
                            @{ @"username": @"Bruce Wayne",
@@ -40,6 +40,7 @@ int const MESSAGE_BAR_OFFSET = 10;
                               @"original_message": @"Eu tive um otimo final de semana",
                               @"translated_message": @"I had a great weekend!" },
                               ];
+        self.messages = [[NSMutableArray alloc] initWithArray:messages];
                            
     }
     return self;
@@ -79,6 +80,15 @@ int const MESSAGE_BAR_OFFSET = 10;
 }
 
 - (IBAction)onSendButton:(id)sender {
+    NSLog(@"send %@", self.messageField.text);
+    [self.messages addObject:@{ @"username": @"Bruce Wayne",
+                               @"original_message": self.messageField.text ,
+                                @"translated_message": self.messageField.text }];
+    [self.tableView reloadData];
+    
+    //clean textbox
+    self.messageField.text =@"";
+    
 }
 
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -178,6 +188,5 @@ int const MESSAGE_BAR_OFFSET = 10;
     [UIView commitAnimations];
     self.keyboardIsShown = YES;
 }
-
 
 @end
