@@ -23,6 +23,8 @@
 
 @property (strong, nonatomic) NSString *lang;
 @property (strong, nonatomic) NSDictionary *pickerOptions;
+@property (strong, nonatomic) NSArray *pickerDisplayOptions;
+- (IBAction)onViewTap:(UITapGestureRecognizer *)sender;
 
 - (IBAction)onSignUpFormButton:(id)sender;
 
@@ -35,7 +37,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -44,8 +46,12 @@
 {
     [super viewDidLoad];
     self.pickerOptions = @{ @"English" : @"en",
-                           @"Brazillian" : @"br",
-                           };
+                            @"Portuguese" : @"pt",
+                            @"Spanish" : @"es"
+                            };
+    self.pickerDisplayOptions = [self.pickerOptions allKeys];
+    self.languagePickerView.delegate = self;
+    self.languagePickerView.dataSource = self;
     [self.languagePickerView reloadAllComponents];
 
     
@@ -58,14 +64,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onViewTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
+}
+
 - (IBAction)onSignUpFormButton:(id)sender {
     if (! [self.password1TextField.text isEqual: self.password2TextField.text]) {
         NSLog(@"Passwords didn't match, try again");
     } else {
+        int row = [self.languagePickerView selectedRowInComponent:0];
+        
         [User signupNewUser:self.usernameTextField.text withPassword:self.password1TextField.text
-         // stubbed for now until I figure this out.
-         //                  withEmail:self.emailTextField.text withLanguage:
-                  withEmail:self.emailTextField.text withLanguage: @"en" withFullName:self.nameTextField.text];
+                  withEmail:self.emailTextField.text withLanguage: [self.pickerOptions valueForKey: self.pickerDisplayOptions[row]] withFullName:self.nameTextField.text];
         
         
         MainViewController *mvc = [[MainViewController alloc] init];
@@ -86,14 +96,14 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component
 {
-    return self.pickerOptions.count;
+    return self.pickerDisplayOptions.count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component
 {
-    return[self.pickerOptions allKeys][row];
+    return self.pickerDisplayOptions[row];
 }
 
 @end
