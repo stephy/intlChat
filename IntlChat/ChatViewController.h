@@ -12,5 +12,6 @@
 @property (nonatomic, strong) NSDictionary *chat;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *currentUser; //needs to change to PF USER?
+@property (nonatomic, strong) NSString *friendUser;
 - (IBAction)onSendButton:(id)sender;
 @end

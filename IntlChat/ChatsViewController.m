@@ -23,13 +23,13 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.chats = @[ @{ @"buddy"     : @"Stephani Alves",
+        self.chats = @[ @{ @"username"     : @"Stephani Alves",
                            @"language" : @"Portuguese",
                            @"image_url": @"thumb-bruce-wayne.png" },
-                        @{ @"buddy"     : @"Daniel Avalone",
+                        @{ @"username"     : @"Daniel Avalone",
                            @"language" : @"Portuguese",
                            @"image_url": @"thumb-bruce-wayne.png" },
-                        @{ @"buddy"     : @"Klaus Alves",
+                        @{ @"username"     : @"Klaus Alves",
                            @"language" : @"Portuguese",
                            @"image_url": @"thumb-bruce-wayne.png" },
                        ];
@@ -67,7 +67,7 @@
     cell.backgroundColor = [UIColor clearColor];
     
     NSDictionary *chat = [self.chats objectAtIndex:indexPath.row];
-    cell.friendLabel.text = chat[@"buddy"];
+    cell.friendLabel.text = chat[@"username"];
     cell.languageLabel.text = chat[@"language"];
     //UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     //imgView.image = [UIImage imageNamed:@"769-male.png"];
@@ -87,6 +87,7 @@
     
     ChatViewController *cvc = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
     cvc.chat = chat;
+    [cvc setTitle:chat[@"username"]];
     [self.navigationController pushViewController:cvc animated:YES];
 }
 

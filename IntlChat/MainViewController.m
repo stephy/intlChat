@@ -48,18 +48,21 @@
 
 - (IBAction)onProfileButton:(id)sender {
     ProfileViewController *profile = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    [self setTitle:@"Profile"];
     [self.viewContainer addSubview:profile.view];
     [self addChildViewController:profile];
 }
 
 - (IBAction)onFriendsButton:(id)sender {
     FriendsViewController *friends = [[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil];
+    [self setTitle:@"Contacts"];
     [self.viewContainer addSubview:friends.view];
     [self addChildViewController:friends];
 }
 
 - (IBAction)onChatsButton:(id)sender {
     ChatsViewController *chats = [[ChatsViewController alloc] initWithNibName:@"ChatsViewController" bundle:nil];
+    [self setTitle:@"Chats"];
     [self.viewContainer addSubview:chats.view];
     [self addChildViewController:chats];
 }

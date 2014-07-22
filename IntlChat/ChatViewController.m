@@ -54,9 +54,12 @@ int const MESSAGE_BAR_OFFSET = 10;
     //registration process
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageCell" bundle:nil] forCellReuseIdentifier:@"MessageCell"];
     
+    //dismiss keyboard
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard)];
     
+    [self.view addGestureRecognizer:tap];
     //move chat view when keyboard shows
-    
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -68,7 +71,7 @@ int const MESSAGE_BAR_OFFSET = 10;
                                                  name:UIKeyboardWillHideNotification
                                                object:self.view.window];
     self.keyboardIsShown = NO;
-    //make contentSize bigger than your scrollSize (you will need to figure out for your own use case)
+    //make contentSize bigger than your scrollSize
     CGSize scrollContentSize = CGSizeMake(320, 345);
     self.scrollView.contentSize = scrollContentSize;
 }
@@ -121,6 +124,7 @@ int const MESSAGE_BAR_OFFSET = 10;
  
     MessageViewController *mvc = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:[NSBundle mainBundle]];
     mvc.currentMessage = self.messages[indexPath.row];
+    [mvc setTitle:@"Translation"];
     [self.navigationController pushViewController:mvc animated:YES];
 }
 
@@ -191,6 +195,10 @@ int const MESSAGE_BAR_OFFSET = 10;
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewAutomaticDimension;
+}
+
+-(void)dismissKeyboard {
+    [self.messageField resignFirstResponder];
 }
 
 @end
