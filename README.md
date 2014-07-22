@@ -10,5 +10,10 @@ Progress:
 [x] Parse: partially set up - user can register and log in
 [ ] Translation
 
-Flow demonstrated below:
+Sign Up demonstrated below:
+
 ![alt tag](https://raw.githubusercontent.com/stephy/intlChat/master/intlChat.gif)
+
+Log In Flow:
+
+![alt tag](https://raw.githubusercontent.com/stephy/intlChat/master/intlChat2.gif)
