@@ -48,10 +48,11 @@
 -(NSString *)firstName {
     // By convention, we'll call this the first "word"
     NSArray *names = [self namesArray];
-    if ( [names count] > -1) {
+    if ( [names count] > 0) {
         return names[0];
+    } else {
+        return self.fullName;
     }
-    return self.fullName;
 }
 
 -(NSString *)lastName {

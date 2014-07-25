@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Language.h"
+#import "User.h"
+
 @interface ProfileViewController : UIViewController
+
+@property (strong, nonatomic) User *forUser;
 
 @end

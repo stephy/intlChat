@@ -28,6 +28,7 @@
     if (self) {
         // Custom initialization
         [[UITextField appearance] setTintColor:[UIColor whiteColor]];
+        self.passwordField.delegate = self;
     }
     return self;
 }
@@ -66,5 +67,11 @@
 - (IBAction)onSignUpButton:(id)sender {
     SignUpViewController *svc = [[SignUpViewController alloc] init];
     [self presentViewController:svc animated:YES completion:nil];
+}
+
+#pragma textfield delegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self onLoginButton:self.passwordField];
+    return YES;
 }
 @end

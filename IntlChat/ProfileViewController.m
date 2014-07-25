@@ -6,9 +6,16 @@
 //  Copyright (c) 2014 stephanimoroni. All rights reserved.
 //
 
+#import "UIImageView+AFNetworking.h"
+
 #import "ProfileViewController.h"
 
 @interface ProfileViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *lastNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *firstNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
+@property (strong, nonatomic) IBOutlet UILabel *languageLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end
 
@@ -26,7 +33,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    Language *lang = [Language instance];
+    
+    if (self.forUser == nil) {
+        self.forUser = [User currentUser];
+    }
+    self.emailLabel.text = self.forUser.email;
+    self.languageLabel.text = [lang printableLanguage:self.forUser.language];
+    self.firstNameLabel.text = [self.forUser firstName];
+    self.lastNameLabel.text = [self.forUser lastName];    
+
+    if (self.profileImageView != nil) {
+        [self.profileImageView setImageWithURL:
+          [NSURL URLWithString:self.forUser.profileImageURL]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
