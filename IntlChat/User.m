@@ -17,10 +17,8 @@
 //@dynamic emailAddr;
 @dynamic language;
 @dynamic fullName;
+@dynamic profileImageURL;
 
-//+ (NSString *)parseClassName {
-//    return @"User";
-//}
 
 + (User *)user {
     return (User *) [super user];
@@ -47,5 +45,31 @@
     }];
 }
 
+-(NSString *)firstName {
+    // By convention, we'll call this the first "word"
+    NSArray *names = [self namesArray];
+    if ( [names count] > -1) {
+        return names[0];
+    }
+    return self.fullName;
+}
+
+-(NSString *)lastName {
+    // By convention, we'll call this everything but the first "word".  This
+    // should handle names like 'de Rossi'.
+    NSArray *names = [self namesArray];
+    NSString *last = @"";
+    
+    // And this handles 'Sting'
+    if ([names count] > 1) {
+        last = [[names subarrayWithRange:(NSRange){1, [names count]-1}] componentsJoinedByString:@" "];
+    }
+    return last;
+    
+}
+
+-(NSArray *)namesArray {
+    return [self.fullName componentsSeparatedByString:@" "];
+}
 
 @end

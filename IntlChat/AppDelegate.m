@@ -13,6 +13,10 @@
 #import <Parse/Parse.h>
 
 #import "User.h"
+#import "Friend.h"
+#import "Chat.h"
+#import "Message.h"
+
 
 @implementation AppDelegate
 
@@ -79,6 +83,9 @@
 - (void) setupParse {
     // Register all model PFObject subclasses here.
     [User registerSubclass];
+    [Friend registerSubclass];
+    [Message registerSubclass];
+    [Chat registerSubclass];
     
     // Init Parse library
     [Parse setApplicationId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"ParseProdAppID"]

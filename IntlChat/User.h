@@ -13,6 +13,7 @@
 
 @property (retain) NSString *fullName;
 @property (retain) NSString *language;
+@property (retain) NSString *profileImageURL;
 // Rest are covered by PFUser
 //@property (retain) NSString *emailAddr;
 //@property (retain) NSString *userid;
@@ -25,5 +26,8 @@
 + (void) signupNewUser: (NSString *)username withPassword: (NSString *)password
              withEmail: (NSString *)email withLanguage: (NSString *)lang
           withFullName: (NSString *) name;
+
+-(NSString *)firstName;
+-(NSString *)lastName;
 
 @end
