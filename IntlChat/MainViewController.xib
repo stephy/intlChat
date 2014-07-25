@@ -6,6 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="fullNameLabel" destination="Qk6-Ll-oSe" id="cFH-eF-feE"/>
+                <outlet property="languageLabel" destination="ajo-mw-h0d" id="RjY-C0-c61"/>
+                <outlet property="subscriptLabel" destination="OkI-nB-xSQ" id="9HL-Kd-FJu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewContainer" destination="Ccl-S4-Oad" id="g1c-qs-ZbQ"/>
             </connections>

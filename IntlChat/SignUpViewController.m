@@ -10,7 +10,7 @@
 #import "MainViewController.h"
 
 #import "User.h"
-
+#import "Language.h"
 
 @interface SignUpViewController()
 
@@ -45,10 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.pickerOptions = @{ @"English" : @"en",
-                            @"Portuguese" : @"pt",
-                            @"Spanish" : @"es"
-                            };
+    Language *langs = [Language instance];
+    self.pickerOptions = langs.languages;
     self.pickerDisplayOptions = [self.pickerOptions allKeys];
     self.languagePickerView.delegate = self;
     self.languagePickerView.dataSource = self;
