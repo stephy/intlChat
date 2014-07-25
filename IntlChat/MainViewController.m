@@ -11,7 +11,16 @@
 #import "FriendsViewController.h"
 #import "ProfileViewController.h"
 
+#import "User.h"
+#import "Language.h"
+
 @interface MainViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *languageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *subscriptLabel;
+
+
+
 - (IBAction)onProfileButton:(id)sender;
 - (IBAction)onFriendsButton:(id)sender;
 - (IBAction)onChatsButton:(id)sender;
@@ -35,9 +44,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    // Custom initialization
-    // First initial view is the chats view
+    User *myuser = [User currentUser];
+    Language *lang = [Language instance];
+    
+    self.fullNameLabel.text = myuser.fullName;
+    self.languageLabel.text = [lang printableLanguage:myuser.language];
+    self.subscriptLabel.text = [NSString
+      stringWithFormat:@"%@ %@",
+      @"All your chats will be displayed in",
+      [lang printableLanguage:myuser.language]];
 }
 
 - (void)didReceiveMemoryWarning
