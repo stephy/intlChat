@@ -1,19 +1,17 @@
 //
-//  MessageCell.m
+//  MessageFriendCell.m
 //  IntlChat
 //
-//  Created by Stephani Alves on 7/20/14.
+//  Created by Stephani Alves on 7/26/14.
 //  Copyright (c) 2014 stephanimoroni. All rights reserved.
 //
 
-#import "MessageCell.h"
+#import "MessageFriendCell.h"
 
-@implementation MessageCell
-
+@implementation MessageFriendCell
 - (void)awakeFromNib
 {
     // Initialization code
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -22,5 +20,4 @@
 
     // Configure the view for the selected state
 }
-
 @end

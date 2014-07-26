@@ -9,6 +9,7 @@
 #import "ChatViewController.h"
 #import "MessageCell.h"
 #import "MessageViewController.h"
+#import "MessageFriendCell.h"
 
 int const MESSAGE_BAR_OFFSET = 10;
 
@@ -17,6 +18,7 @@ int const MESSAGE_BAR_OFFSET = 10;
 @property (strong, nonatomic) IBOutlet UITextField *messageField;
 @property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) MessageCell *msgCell;
+@property (strong, nonatomic) MessageFriendCell *msgFriendCell;
 @property BOOL keyboardIsShown;
 
 @end
@@ -32,13 +34,16 @@ int const MESSAGE_BAR_OFFSET = 10;
         
         NSArray *messages = @[ @{ @"username": @"Stephani Alves",
                               @"original_message": @"Oi Tudo bom?",
-                              @"translated_message": @"Hi, how are you?" },
+                              @"translated_message": @"Hi, how are you? Hi, how are you? Hi, how are you?  It is a diet shake... It is pretty good.. it is supposed to be really good for you. You can read more about it here: Stephani It is a diet shake... It is pretty good.. it is supposed to be really good for you. You can read more about it here:" },
                            @{ @"username": @"Bruce Wayne",
                               @"original_message": @"I am doing great, How about you?",
                               @"translated_message": @"I am doing great, How about you?" },
                            @{ @"username": @"Stephani Alves",
                               @"original_message": @"Eu tive um otimo final de semana",
                               @"translated_message": @"I had a great weekend!" },
+                           @{ @"username": @"Stephani Alves",
+                              @"original_message": @"nao",
+                              @"translated_message": @"no" },
                               ];
         self.messages = [[NSMutableArray alloc] initWithArray:messages];
                            
@@ -53,7 +58,7 @@ int const MESSAGE_BAR_OFFSET = 10;
     //load personalized cell
     //registration process
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageCell" bundle:nil] forCellReuseIdentifier:@"MessageCell"];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"MessageFriendCell" bundle:nil] forCellReuseIdentifier:@"MessageFriendCell"];
     //dismiss keyboard
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
 //                                                                          action:@selector(dismissKeyboard)];
@@ -101,50 +106,91 @@ int const MESSAGE_BAR_OFFSET = 10;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
-    self.tableView.backgroundColor =[UIColor clearColor];
-    cell.backgroundColor = [UIColor clearColor];
     
     NSDictionary *messageDetails = self.messages[indexPath.row];
+    self.tableView.backgroundColor =[UIColor clearColor];
     
-    if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
-        
-        NSLog(@"SAME");
-        
-    }
-    cell.usernameLabel.text = messageDetails[@"username"];
+    //current user cell
+    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+    //no flashing on the cell
+    //this will prevent the cell to highlight for a bit before the will select returns nil
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     cell.messageLabel.text = messageDetails[@"translated_message"];
     
-    return cell;
-}
-
-//on row click open detailed view
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageViewController *mvc = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:[NSBundle mainBundle]];
-    mvc.currentMessage = self.messages[indexPath.row];
-    [mvc setTitle:@"Translation"];
-    [self.navigationController pushViewController:mvc animated:YES];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    // friend cell settings
+    MessageFriendCell *friendCell = [tableView dequeueReusableCellWithIdentifier:@"MessageFriendCell"];
     
-    //calculate height based on cell
-    if (!self.msgCell){
-        self.msgCell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+    //no flashing on the cell
+    //this will prevent the cell to highlight for a bit before the will select returns nil
+    friendCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    friendCell.backgroundColor = [UIColor clearColor];
+    friendCell.messageLabel.text = messageDetails[@"translated_message"];
+    
+    
+    //add gesture recognizer to show translation
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [friendCell.messageView addGestureRecognizer:singleFingerTap];
+    
+    //load cell depending on the user
+    if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
+        return cell;
+    } else {
+        return friendCell;
     }
+}
+
+//The event handling method
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    
+    //Do stuff here..
+    NSLog(@"tapped");
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //don't allow the cell to be clicked
+    return nil;
+}
+
+//calculate cell height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *messageDetails = self.messages[indexPath.row];
-    //configure the cell
-    self.msgCell.usernameLabel.text = messageDetails[@"username"];
-    self.msgCell.messageLabel.text = messageDetails[@"translated_message"];
     
-    
-    //layout the cell
-    [self.msgCell layoutIfNeeded];
-    CGFloat height = [self.msgCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
-    //get the height
-    
-    return height;
+    //load cell depending on the user
+    if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
+        //calculate height based on cell
+        if (!self.msgCell){
+            self.msgCell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+        }
+        //configure the cell
+        self.msgCell.messageLabel.text = messageDetails[@"translated_message"];
+        //layout the cell
+        [self.msgCell layoutIfNeeded];
+        CGFloat height = [self.msgCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
+        //get the height
+        NSLog(@"height: %1.f", height);
+        return height;
+    } else {
+        //calculate height based on cell
+        if (!self.msgFriendCell){
+            self.msgFriendCell = [tableView dequeueReusableCellWithIdentifier:@"MessageFriendCell"];
+        }
+        
+        //configure the cell
+        self.msgFriendCell.messageLabel.text = messageDetails[@"translated_message"];
+        //layout the cell
+        [self.msgFriendCell layoutIfNeeded];
+
+        CGFloat height = [self.msgFriendCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
+        //get the height
+        NSLog(@"height: %1.f", height);
+        return height;
+
+    }
+
 }
 
 - (void)keyboardWillHide:(NSNotification *)n
