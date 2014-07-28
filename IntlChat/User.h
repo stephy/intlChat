@@ -38,5 +38,5 @@
 -(NSString *)lastName;
 
 -(void)friendsWithCompletion:(void(^)(NSArray *friends))callback;
-
+-(void)allUsersWithCompletion:(void(^)(NSArray *users))callback;
 @end

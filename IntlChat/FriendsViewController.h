@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "User.h"
+#import "Friend.h"
 
 @interface FriendsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
 @property (strong, nonatomic) NSArray *friendsList;
 @property (strong, nonatomic) User *forUser;
+@property (assign) BOOL showAllUsers;
 
 @end

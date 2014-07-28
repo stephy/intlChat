@@ -74,27 +74,56 @@
 }
 
 -(void)friendsWithCompletion:(void(^)(NSArray *friends))callback {
-
-    PFQuery *wasFriender = [PFQuery queryWithClassName:@"Friends"];
+    NSMutableArray *myFriends = [[NSMutableArray alloc] init];
+    
+    PFQuery *wasFriender = [PFQuery queryWithClassName:@"Friend"];
     [wasFriender whereKey:@"friender" equalTo:self];
     [wasFriender whereKey:@"accepted" equalTo:[NSNumber numberWithBool:YES]];
-
-    PFQuery *wasFriendee = [PFQuery queryWithClassName:@"Friends"];
+    
+    PFQuery *wasFriendee = [PFQuery queryWithClassName:@"Friend"];
     [wasFriendee whereKey:@"friendee" equalTo:self];
     [wasFriendee whereKey:@"accepted" equalTo:[NSNumber numberWithBool:YES]];
     
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[wasFriender,wasFriendee]];
+    [query includeKey:@"friender"];
+    [query includeKey:@"friendee"];    
     [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
         if (!error) {
-            // The find succeeded.
             NSLog(@"Successfully retrieved %d friends.", results.count);
-            callback(results);
+            for (PFObject *obj in results) {
+                if ([obj[@"friender"][@"username"] isEqual:self.username]) {
+                    [myFriends addObject: obj[@"friendee"]];
+                } else { //friendee
+                    [myFriends addObject: obj[@"friender"]];
+                }
+            }
+            callback(myFriends);
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
 }];
     
+}
+
+-(void)allUsersWithCompletion:(void(^)(NSArray *users))callback {    
+    PFQuery *query = [User query];
+
+    [query whereKey:@"username" notEqualTo: self.username];
+    [query orderByAscending:@"fullName"];
+
+    //query.limit = 20; // arbitrary for now
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d users.", results.count);
+            callback(results);
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 @end
