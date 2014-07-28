@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
+@protocol FriendsDelegate <NSObject>
+@required
+- (void) friendsHandler: (NSArray *)friends;
+@end
+
+
 @interface User : PFUser <PFSubclassing>
 
 @property (retain) NSString *fullName;
@@ -27,7 +33,10 @@
              withEmail: (NSString *)email withLanguage: (NSString *)lang
           withFullName: (NSString *) name;
 
+// User specific methods
 -(NSString *)firstName;
 -(NSString *)lastName;
+
+-(void)friendsWithCompletion:(void(^)(NSArray *friends))callback;
 
 @end

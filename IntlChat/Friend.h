@@ -17,6 +17,8 @@
 @property (retain) NSDate *friendshipStart;
 @property BOOL accepted;
 
-+ (NSString *)parseClassName;
++ (Friend *) instance;
+
++ (NSString *) parseClassName;
 
 @end

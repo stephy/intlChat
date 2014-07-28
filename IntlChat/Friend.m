@@ -17,7 +17,30 @@
 @dynamic friendshipStart;
 @dynamic accepted;
 
+static Friend *instance;
+
++(Friend *) instance {
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        instance = [[Friend alloc] init];
+    });
+    
+    return instance;
+}
+
+
 + (NSString *)parseClassName {
     return @"Friend";
 }
+
+-(id) init {
+    self = [super init];
+    return self;
+}
+
+//-(NSArray *)friendsForUser: (User *)user {
+//    
+//    
+//}
 @end

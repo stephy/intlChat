@@ -20,17 +20,21 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        if (self.forUser == nil) {
+            self.forUser = [User currentUser];
+        }
+        
         // Custom initialization
-        self.friendsList = @[ @{@"username": @"Klaus Alves",
-                                @"language": @"Portuguese"},
-                              @{@"username": @"Marissa Mayer",
-                                @"language": @"English"},
-                              @{@"username": @"Jason Statham",
-                                @"language": @"English"},
-                              @{@"username": @"Scarlett Johanson",
-                                @"language": @"English"},
-                              @{@"username": @"Dawson Lery",
-                                @"language": @"English"}];
+//        self.friendsList = @[ @{@"username": @"Klaus Alves",
+//                                @"language": @"Portuguese"},
+//                              @{@"username": @"Marissa Mayer",
+//                                @"language": @"English"},
+//                              @{@"username": @"Jason Statham",
+//                                @"language": @"English"},
+//                              @{@"username": @"Scarlett Johanson",
+//                                @"language": @"English"},
+//                              @{@"username": @"Dawson Lery",
+//                                @"language": @"English"}];
     }
     return self;
 }
@@ -41,6 +45,11 @@
     // Do any additional setup after loading the view from its nib.
     [self.tableview registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:@"FriendCell"];
     self.tableview.rowHeight = 70;
+    [self.forUser friendsWithCompletion:^(NSArray *friends) {
+        self.friendsList = friends;
+        [self.tableview reloadData];
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning

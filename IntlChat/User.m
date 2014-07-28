@@ -73,4 +73,28 @@
     return [self.fullName componentsSeparatedByString:@" "];
 }
 
+-(void)friendsWithCompletion:(void(^)(NSArray *friends))callback {
+
+    PFQuery *wasFriender = [PFQuery queryWithClassName:@"Friends"];
+    [wasFriender whereKey:@"friender" equalTo:self];
+    [wasFriender whereKey:@"accepted" equalTo:[NSNumber numberWithBool:YES]];
+
+    PFQuery *wasFriendee = [PFQuery queryWithClassName:@"Friends"];
+    [wasFriendee whereKey:@"friendee" equalTo:self];
+    [wasFriendee whereKey:@"accepted" equalTo:[NSNumber numberWithBool:YES]];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[wasFriender,wasFriendee]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d friends.", results.count);
+            callback(results);
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+}];
+    
+}
+
 @end
