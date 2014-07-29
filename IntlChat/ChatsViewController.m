@@ -88,7 +88,7 @@
 
     ChatViewController *cvc = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:[NSBundle mainBundle]];
     cvc.currentChat = chat;
-    [cvc setTitle:partner.username];
+    [cvc setTitle:partner.fullName];
     [self.navigationController pushViewController:cvc animated:YES];
 }
 
