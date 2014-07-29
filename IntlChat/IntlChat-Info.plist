@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ParseProdClientKey</key>
-	<string>?foo?</string>
-	<key>ParseProdAppID</key>
-	<string>?bar?</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -26,8 +22,18 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>GoogleAPIKey</key>
+	<string>?quux?</string>
+	<key>GoogleProdClientID</key>
+	<string>?derp?</string>
+	<key>GoogleProdClientSecret</key>
+	<string>?baz?</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>ParseProdAppID</key>
+	<string>?bar?</string>
+	<key>ParseProdClientKey</key>
+	<string>?foo?</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
