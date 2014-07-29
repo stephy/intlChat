@@ -58,12 +58,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="734-chat.png" translatesAutoresizingMaskIntoConstraints="NO" id="VOI-9b-3m5">
-                    <rect key="frame" x="103" y="46" width="91" height="72"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="734-chat.png" translatesAutoresizingMaskIntoConstraints="NO" id="t3p-rk-KAa">
-                    <rect key="frame" x="145" y="63" width="91" height="72"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chatlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="VOI-9b-3m5">
+                    <rect key="frame" x="109" y="49" width="120" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -73,7 +69,7 @@
         </view>
     </objects>
     <resources>
-        <image name="734-chat.png" width="28" height="25"/>
         <image name="Blue-1536x2048.jpg" width="1536" height="2048"/>
+        <image name="chatlogo.png" width="926" height="670"/>
     </resources>
 </document>
