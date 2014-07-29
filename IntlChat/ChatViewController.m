@@ -11,7 +11,8 @@
 #import "MessageViewController.h"
 #import "MessageFriendCell.h"
 
-int const MESSAGE_BAR_OFFSET = 10;
+int const MESSAGE_BAR_OFFSET = 8;
+int const MAX_CALLS = 2;
 
 @interface ChatViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -19,6 +20,13 @@ int const MESSAGE_BAR_OFFSET = 10;
 @property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) MessageCell *msgCell;
 @property (strong, nonatomic) MessageFriendCell *msgFriendCell;
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
+@property int currentIndexPathRow;
+@property (strong, nonatomic) NSIndexPath *currentIndexPath;
+@property (strong, nonatomic) NSMutableArray *rowShowingTranslation;
+@property (strong, nonatomic) NSMutableDictionary *selectedIndexes;
+@property CGRect translationTopFrame;
+
 @property BOOL keyboardIsShown;
 
 @end
@@ -34,7 +42,7 @@ int const MESSAGE_BAR_OFFSET = 10;
         
         NSArray *messages = @[ @{ @"username": @"Stephani Alves",
                               @"original_message": @"Oi Tudo bom?",
-                              @"translated_message": @"Hi, how are you? Hi, how are you? Hi, how are you?  It is a diet shake... It is pretty good.. it is supposed to be really good for you. You can read more about it here: Stephani It is a diet shake... It is pretty good.. it is supposed to be really good for you. You can read more about it here:" },
+                              @"translated_message": @"Hi, how are you?" },
                            @{ @"username": @"Bruce Wayne",
                               @"original_message": @"I am doing great, How about you?",
                               @"translated_message": @"I am doing great, How about you?" },
@@ -42,9 +50,11 @@ int const MESSAGE_BAR_OFFSET = 10;
                               @"original_message": @"Eu tive um otimo final de semana",
                               @"translated_message": @"I had a great weekend!" },
                            @{ @"username": @"Stephani Alves",
-                              @"original_message": @"nao",
-                              @"translated_message": @"no" },
+                              @"original_message": @"Eu fui para a praia",
+                              @"translated_message": @"I went to the beach" },
                               ];
+        NSArray *rowTranslationSelected = @[@NO, @NO, @NO, @NO];
+        self.rowShowingTranslation = [[NSMutableArray alloc] initWithArray:rowTranslationSelected];
         self.messages = [[NSMutableArray alloc] initWithArray:messages];
                            
     }
@@ -59,11 +69,11 @@ int const MESSAGE_BAR_OFFSET = 10;
     //registration process
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageCell" bundle:nil] forCellReuseIdentifier:@"MessageCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageFriendCell" bundle:nil] forCellReuseIdentifier:@"MessageFriendCell"];
-    //dismiss keyboard
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                          action:@selector(dismissKeyboard)];
-//    
-//    [self.view addGestureRecognizer:tap];
+    
+    //send a message every too seconds for testing
+//    NSTimer* myTimer = [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
+//                                                      selector: @selector(onReceiveMessage) userInfo: nil repeats: YES];
+    
     //move chat view when keyboard shows
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -79,6 +89,17 @@ int const MESSAGE_BAR_OFFSET = 10;
     //make contentSize bigger than your scrollSize
     CGSize scrollContentSize = CGSizeMake(320, 345);
     self.scrollView.contentSize = scrollContentSize;
+    
+    self.selectedIndexes = [[NSMutableDictionary alloc] init];
+    
+    //set cursor color
+    [[UITextView appearance] setTintColor:[UIColor colorWithRed:1 green:0 blue:0.376 alpha:1] /*#1ad4fd*/];
+}
+
+- (void)viewDidUnload {
+	self.selectedIndexes = nil;
+	
+	[super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,14 +108,26 @@ int const MESSAGE_BAR_OFFSET = 10;
     // Dispose of any resources that can be recreated.
 }
 
+
+//create random chat from another person for test purposes
+- (void) onReceiveMessage{
+    [self.messages addObject: @{ @"username": @"Stephani Alves",
+                                 @"original_message": @"Eu tive um otimo final de semana",
+                                 @"translated_message": @"I had a great weekend!" }];
+    [self.tableView reloadData];
+}
+
 - (IBAction)onSendButton:(id)sender {
     NSLog(@"send %@", self.messageField.text);
     [self.messages addObject:@{ @"username": @"Bruce Wayne",
-                               @"original_message": self.messageField.text ,
+                                @"original_message": self.messageField.text ,
                                 @"translated_message": self.messageField.text }];
     [self.tableView reloadData];
+
+    //scroll to top
+    [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + 20) animated:YES];
     
-    //clean textbox
+    //clear textbox
     self.messageField.text =@"";
     
 }
@@ -113,7 +146,7 @@ int const MESSAGE_BAR_OFFSET = 10;
     //current user cell
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
     //no flashing on the cell
-    //this will prevent the cell to highlight for a bit before the will select returns nil
+    //this will prevent the cell to highlight for a bit before the will select returns
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     cell.messageLabel.text = messageDetails[@"translated_message"];
@@ -126,12 +159,14 @@ int const MESSAGE_BAR_OFFSET = 10;
     friendCell.selectionStyle = UITableViewCellSelectionStyleNone;
     friendCell.backgroundColor = [UIColor clearColor];
     friendCell.messageLabel.text = messageDetails[@"translated_message"];
+    friendCell.translationLabel.text = messageDetails[@"original_message"];
+    friendCell.translationView.hidden = YES;
     
-    
-    //add gesture recognizer to show translation
+    //add gesture recognizer to message, so user can tap to see translation
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
+    
     [friendCell.messageView addGestureRecognizer:singleFingerTap];
     
     //load cell depending on the user
@@ -142,37 +177,138 @@ int const MESSAGE_BAR_OFFSET = 10;
     }
 }
 
-//The event handling method
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+////The event handling method
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer{
     
-    //Do stuff here..
-    NSLog(@"tapped");
+    UIView *tappedView = [recognizer.view hitTest:[recognizer locationInView:recognizer.view] withEvent:nil];
+    
+    CGPoint location = [recognizer locationInView:[recognizer.view self]];
+    
+
+    NSIndexPath *currentIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
+    
+    //set selected path
+    self.selectedIndexPath = currentIndexPath;
+
+    NSDictionary *message = self.messages[currentIndexPath.row];
+    if(currentIndexPath != nil){
+        // remove the cell from tableview
+        //Do stuff here..
+        NSLog(@"tapped view # %d", currentIndexPath.row);
+        NSLog(@"x: %f", location.x);
+        NSLog(@"y: %f", location.y);
+        NSLog(@"message %@", message);
+        MessageFriendCell *selectedCell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
+        
+        //check to see if message is showing translation already
+        if ([self.rowShowingTranslation[currentIndexPath.row]  isEqual: @NO]) {
+            //show translation
+            selectedCell.translationView.hidden = NO;
+            CGRect newFrame = selectedCell.translationView.frame;
+            newFrame.origin.y = selectedCell.messageView.frame.size.height;    // shift right by 500pts
+            NSLog(@"click newFrame.origin.y %f", newFrame.origin.y);
+            [UIView animateWithDuration:0.2
+                                  delay:0
+                                options:UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                 selectedCell.translationView.frame = newFrame;
+                             }
+                             completion:^(BOOL finished) {
+                                 self.rowShowingTranslation[currentIndexPath.row] = @YES;
+                             }];
+            
+            
+        } else {
+            //dismiss translation
+            //remove translation view
+            NSLog(@"remove tranlation");
+            CGRect newFrame = selectedCell.translationView.frame;
+            newFrame.origin.y = selectedCell.messageView.frame.size.height - selectedCell.translationView.frame.size.height;
+            NSLog(@"unclick newFrame.origin.y %f", newFrame.origin.y);
+            [UIView animateWithDuration:0.2
+                                  delay:0
+                                options:UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                 selectedCell.translationView.frame = newFrame;
+                             }
+                             completion:^(BOOL finished) {
+                                 selectedCell.translationView.hidden = YES;
+                                 self.rowShowingTranslation[currentIndexPath.row] = @NO;
+                             }];
+            
+            
+        }//end else
+        
+        
+    }//end if currentIndexPath !=null
+    
+
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //don't allow the cell to be clicked
-    return nil;
+//- (BOOL)cellIsSelected:(NSIndexPath *)indexPath {
+//	// Return whether the cell at the specified index path is selected or not
+//	NSNumber *selectedIndex = [self.selectedIndexes objectForKey:indexPath];
+//    NSLog(@"selected xxx index %@", selectedIndex);
+//	return selectedIndex == nil ? FALSE : [selectedIndex boolValue];
+//}
+
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"dismissing keyboard");
+    //dismiss keyboard
+    [self.messageField resignFirstResponder];
+    
+//    // Deselect cell
+//	[tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+//	
+//	// Toggle 'selected' state
+//	BOOL isSelected = ![self cellIsSelected:indexPath];
+//	
+//	// Store cell 'selected' state keyed on indexPath
+//	NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+//	[self.selectedIndexes setObject:selectedIndex forKey:indexPath];
+//    
+//	// This is where magic happens...
+//	[self.tableView beginUpdates];
+//	[self.tableView endUpdates];
+
 }
 
-//calculate cell height
+//- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    return indexPath;
+//    //return nil;
+//}
+
+//////calculate cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *messageDetails = self.messages[indexPath.row];
     
+//    if ([self cellIsSelected:indexPath]) {
+//        //If our cell is selected, return height with translation
+//        NSLog(@"cell is selected?");
+//        return 800;
+//    }
+    
+    CGFloat height = 0;
+
+    // Cell isn't selected so return single height
     //load cell depending on the user
     if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
         //calculate height based on cell
         if (!self.msgCell){
             self.msgCell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
         }
+        
         //configure the cell
         self.msgCell.messageLabel.text = messageDetails[@"translated_message"];
         //layout the cell
         [self.msgCell layoutIfNeeded];
-        CGFloat height = [self.msgCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
+        height = [self.msgCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
         //get the height
-        NSLog(@"height: %1.f", height);
-        return height;
+        NSLog(@"MESSAGE: %@", messageDetails[@"translated_message"]);
+        NSLog(@"height: %1.f %d", height, indexPath.row);
+
     } else {
         //calculate height based on cell
         if (!self.msgFriendCell){
@@ -181,15 +317,17 @@ int const MESSAGE_BAR_OFFSET = 10;
         
         //configure the cell
         self.msgFriendCell.messageLabel.text = messageDetails[@"translated_message"];
+        self.msgFriendCell.translationLabel.text = messageDetails[@"original_message"];
+        self.msgFriendCell.translationView.hidden = YES;
         //layout the cell
         [self.msgFriendCell layoutIfNeeded];
-
-        CGFloat height = [self.msgFriendCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
+        
+        height = [self.msgFriendCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
         //get the height
-        NSLog(@"height: %1.f", height);
-        return height;
-
+        NSLog(@"height: %1.f %d", height, indexPath.row);
     }
+//
+    return height;
 
 }
 
@@ -209,6 +347,7 @@ int const MESSAGE_BAR_OFFSET = 10;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [self.scrollView setFrame:viewFrame];
+    
     [UIView commitAnimations];
     
     self.keyboardIsShown = NO;
@@ -234,10 +373,12 @@ int const MESSAGE_BAR_OFFSET = 10;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [self.scrollView setFrame:viewFrame];
+    
     [UIView commitAnimations];
     self.keyboardIsShown = YES;
 }
 
+//trigger heightForRowAtIndexPath
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewAutomaticDimension;
 }
@@ -245,5 +386,9 @@ int const MESSAGE_BAR_OFFSET = 10;
 -(void)dismissKeyboard {
     [self.messageField resignFirstResponder];
 }
+
+
+#pragma Mark
+#pragma Auto Resize Cells
 
 @end

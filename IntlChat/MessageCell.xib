@@ -17,7 +17,7 @@
                         <rect key="frame" x="5" y="5" width="310" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" misplaced="YES" text="message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="3zE-3Y-AFe">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" text="message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="3zE-3Y-AFe">
                                 <rect key="frame" x="6" y="6" width="298" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -29,17 +29,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.15383014867710393" green="0.62563645274656776" blue="0.95681202170000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="3zE-3Y-AFe" secondAttribute="bottom" constant="6" id="D4n-W3-yV7"/>
-                            <constraint firstItem="3zE-3Y-AFe" firstAttribute="top" secondItem="HI4-wE-JS7" secondAttribute="top" constant="6" id="QqI-rY-X6b"/>
-                            <constraint firstItem="3zE-3Y-AFe" firstAttribute="leading" secondItem="HI4-wE-JS7" secondAttribute="leading" constant="6" id="Rwe-0j-iC4"/>
-                            <constraint firstAttribute="trailing" secondItem="3zE-3Y-AFe" secondAttribute="trailing" constant="6" id="cCA-4X-LJP"/>
+                            <constraint firstAttribute="bottom" secondItem="3zE-3Y-AFe" secondAttribute="bottom" constant="6" id="DhP-r8-TFk"/>
+                            <constraint firstAttribute="trailing" secondItem="3zE-3Y-AFe" secondAttribute="trailing" constant="6" id="YLO-SX-27Y"/>
+                            <constraint firstItem="3zE-3Y-AFe" firstAttribute="leading" secondItem="HI4-wE-JS7" secondAttribute="leading" constant="6" id="cFq-U0-MRf"/>
+                            <constraint firstItem="3zE-3Y-AFe" firstAttribute="top" secondItem="HI4-wE-JS7" secondAttribute="top" constant="6" id="i16-rg-h4M"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="HI4-wE-JS7" secondAttribute="bottom" constant="6" id="3ED-vq-z6I"/>
-                    <constraint firstItem="HI4-wE-JS7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="G1U-xx-QGL"/>
-                    <constraint firstItem="HI4-wE-JS7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="cuN-CT-iAS"/>
+                    <constraint firstItem="HI4-wE-JS7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="E6G-ik-pUV"/>
+                    <constraint firstAttribute="bottom" secondItem="HI4-wE-JS7" secondAttribute="bottom" constant="4" id="JGE-Fj-y6o"/>
+                    <constraint firstItem="HI4-wE-JS7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="T2r-gL-lTu"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
