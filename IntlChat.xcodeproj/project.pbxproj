@@ -59,6 +59,7 @@
 		97DB3322197C89BA00269951 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DB3320197C89BA00269951 /* FriendCell.xib */; };
 		97DB332B198455E700269951 /* MessageFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DB3329198455E700269951 /* MessageFriendCell.m */; };
 		97DB332C198455E700269951 /* MessageFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DB332A198455E700269951 /* MessageFriendCell.xib */; };
+		97DB33301984769A00269951 /* UIItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DB332F1984769A00269951 /* UIItems.xib */; };
 		9F8ED5B1B6504AD3ADBD6F78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86E74D666DEF4BF7BE0D861F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,7 @@
 		97DB3328198455E700269951 /* MessageFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageFriendCell.h; path = ../MessageFriendCell.h; sourceTree = "<group>"; };
 		97DB3329198455E700269951 /* MessageFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageFriendCell.m; path = ../MessageFriendCell.m; sourceTree = "<group>"; };
 		97DB332A198455E700269951 /* MessageFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageFriendCell.xib; path = ../MessageFriendCell.xib; sourceTree = "<group>"; };
+		97DB332F1984769A00269951 /* UIItems.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIItems.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 		979E143A1978D96400120CDD /* views */ = {
 			isa = PBXGroup;
 			children = (
+				97DB332F1984769A00269951 /* UIItems.xib */,
 				97DB332A198455E700269951 /* MessageFriendCell.xib */,
 				97DB3316197C858100269951 /* MessageCell.xib */,
 				97DB331B197C86C100269951 /* MessageViewController.xib */,
@@ -426,6 +429,7 @@
 				979E14391978D95D00120CDD /* ChatsViewController.xib in Resources */,
 				97DB3322197C89BA00269951 /* FriendCell.xib in Resources */,
 				979E1461197A4E2000120CDD /* 734-chat.png in Resources */,
+				97DB33301984769A00269951 /* UIItems.xib in Resources */,
 				979E145A1978E1AA00120CDD /* MainViewController.xib in Resources */,
 				979E140D1978D94200120CDD /* InfoPlist.strings in Resources */,
 				979E144B1978DA1700120CDD /* SignUpViewController.xib in Resources */,

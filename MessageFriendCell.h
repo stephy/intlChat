@@ -11,5 +11,6 @@
 @interface MessageFriendCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *messageLabel;
 @property (strong, nonatomic) IBOutlet UIView *messageView;
-
+@property (strong, nonatomic) IBOutlet UILabel *translationLabel;
+@property (strong, nonatomic) IBOutlet UIView *translationView;
 @end

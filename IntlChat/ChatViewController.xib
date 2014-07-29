@@ -8,7 +8,7 @@
             <connections>
                 <outlet property="messageField" destination="vcC-1a-OXe" id="r0q-OQ-zaA"/>
                 <outlet property="scrollView" destination="i86-8s-zaa" id="jdq-oQ-wEV"/>
-                <outlet property="tableView" destination="hGr-sF-jaB" id="qhX-Fr-i1A"/>
+                <outlet property="tableView" destination="hGr-sF-jaB" id="ZFC-ke-Euy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,11 +26,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJH-o6-66o">
-                            <rect key="frame" x="5" y="-19" width="320" height="585"/>
+                            <rect key="frame" x="5" y="-19" width="320" height="588"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdJ-eC-u1q">
-                                    <rect key="frame" x="0.0" y="520" width="320" height="65"/>
+                                    <rect key="frame" x="0.0" y="523" width="320" height="65"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsc-VQ-OAv">
@@ -53,14 +53,14 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.0" green="0.57653803151752525" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.88948521939136782" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="65" id="OnN-pO-jBx"/>
                                         <constraint firstAttribute="width" constant="320" id="Op7-S7-ge4"/>
                                     </constraints>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hGr-sF-jaB">
-                                    <rect key="frame" x="0.0" y="139" width="320" height="380"/>
+                                    <rect key="frame" x="0.0" y="139" width="320" height="383"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -76,19 +76,17 @@
                                 <constraint firstAttribute="trailing" secondItem="wdJ-eC-u1q" secondAttribute="trailing" id="GEi-bU-zFq"/>
                                 <constraint firstAttribute="width" constant="320" id="S23-XL-DZf"/>
                                 <constraint firstItem="wdJ-eC-u1q" firstAttribute="leading" secondItem="MJH-o6-66o" secondAttribute="leading" id="Ty4-o5-Nqm"/>
-                                <constraint firstAttribute="height" constant="585" id="voh-Zc-vqn"/>
+                                <constraint firstAttribute="height" constant="588" id="voh-Zc-vqn"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="MJH-o6-66o" firstAttribute="top" secondItem="i86-8s-zaa" secondAttribute="top" constant="-19" id="9UE-wy-eUJ"/>
-                        <constraint firstAttribute="height" constant="576" id="FwK-J3-zED"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" id="FwK-J3-zED"/>
                         <constraint firstItem="MJH-o6-66o" firstAttribute="leading" secondItem="i86-8s-zaa" secondAttribute="leading" constant="5" id="JVn-2G-lO2"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="334" id="XzK-0z-S7X"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="576" id="dZb-o2-82f"/>
                         <constraint firstAttribute="bottom" secondItem="MJH-o6-66o" secondAttribute="bottom" id="elp-5Q-N6a"/>
                         <constraint firstAttribute="trailing" secondItem="MJH-o6-66o" secondAttribute="trailing" constant="9" id="puE-hY-g28"/>
-                        <constraint firstAttribute="width" constant="334" id="puZ-ZN-le8"/>
                     </constraints>
                 </scrollView>
             </subviews>
