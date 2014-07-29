@@ -25,7 +25,6 @@
 //@property (retain) NSString *userid;
 //@property (retain) NSString *password;
 // probably want to add things like
-// avatarURL
 // otherLanguagesSpoken
 
 //+ (NSString *)parseClassName;
@@ -39,4 +38,8 @@
 
 -(void)friendsWithCompletion:(void(^)(NSArray *friends))callback;
 -(void)allUsersWithCompletion:(void(^)(NSArray *users))callback;
+
+-(void)chatsWithCompletion:(void(^)(NSArray *chats))callback;
+
+
 @end

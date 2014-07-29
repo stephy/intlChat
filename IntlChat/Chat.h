@@ -20,4 +20,7 @@
 + (NSString *)parseClassName;
 
 + (void)chatBetween:(User *)chatter andUser:(User *)chattee withCompletion:(void (^)(Chat *chat))callback;
+
+- (User *)chatPartner;
+
 @end

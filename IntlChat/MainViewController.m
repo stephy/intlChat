@@ -18,13 +18,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *languageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subscriptLabel;
-
-
+@property (strong, nonatomic) IBOutlet UIView *viewContainer;
 
 - (IBAction)onProfileButton:(id)sender;
 - (IBAction)onFriendsButton:(id)sender;
 - (IBAction)onChatsButton:(id)sender;
-@property (strong, nonatomic) IBOutlet UIView *viewContainer;
 
 
 
@@ -36,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        // Do stuff.
     }
     return self;
 }

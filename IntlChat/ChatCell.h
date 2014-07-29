@@ -13,5 +13,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *friendLabel;
 @property (strong, nonatomic) IBOutlet UILabel *languageLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *userIcon;
-
 @end

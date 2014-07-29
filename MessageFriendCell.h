@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MessageFriendCell : UITableViewCell
+
 @property (strong, nonatomic) IBOutlet UILabel *messageLabel;
 @property (strong, nonatomic) IBOutlet UIView *messageView;
 

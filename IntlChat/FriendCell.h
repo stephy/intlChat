@@ -13,8 +13,10 @@
 @end
 
 @interface FriendCell : UITableViewCell
+
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *languageLabel;
+
 - (IBAction)onChatButton:(id)sender;
 
 @property (weak, nonatomic) id<CellDelegate>delegate;

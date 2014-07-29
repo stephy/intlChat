@@ -10,6 +10,7 @@
 #import <Parse/PFObject+Subclass.h>
 
 @interface Chat()
+
 + (void)existingChatBetween: (User *) user1 andUser: (User *) user2 withCompletion:(void(^)(Chat *chat))callback;
 
 @end
@@ -70,10 +71,16 @@
         thisChat.chattee = chattee;
         thisChat.chatter = chatter;
         thisChat.chatName = @"(unused for now)";
+        [thisChat saveInBackground];
     } else {
         NSLog(@"Chat already exists");
     }
     callback(thisChat);
+}
+
+- (User *)chatPartner {
+    // Given a Chat, return the user that's not me
+    return (self.chattee == [User currentUser]) ? self.chatter : self.chattee;
 }
 
 @end
