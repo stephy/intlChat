@@ -11,9 +11,17 @@
 
 @interface Chat : PFObject<PFSubclassing>
 
-@property (retain) User *user;
+// Data structure here would be different if we could have N people in
+// a chat, but we will assume there are only two.
+@property (retain) User *chatter; // who initiated
+@property (retain) User *chattee; // other member
 @property (retain) NSString *chatName;
 
 + (NSString *)parseClassName;
+
++ (void)chatBetween:(User *)chatter andUser:(User *)chattee withCompletion:(void (^)(Chat *chat))callback;
+
+- (User *)chatPartner;
+- (void)getChatMessagesWithCompletion:(void (^)(NSArray *messages))callback;
 
 @end

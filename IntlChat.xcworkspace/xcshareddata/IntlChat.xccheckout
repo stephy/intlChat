@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2EF1D5C1-3592-4773-91D6-775249BF88BA</string>
+	<string>C506DEDF-06BE-450D-A4D6-F06964EC41A0</string>
 	<key>IDESourceControlProjectName</key>
 	<string>IntlChat</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BC53E68C-84BC-42E0-860D-1DE804E44619</key>
-		<string>ssh://github.com/stephy/intlChat.git</string>
+		<key>D294947E-ED53-46E5-B291-B872F629792C</key>
+		<string>ssh://github.com/osabina/intlChat.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>IntlChat.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BC53E68C-84BC-42E0-860D-1DE804E44619</key>
+		<key>D294947E-ED53-46E5-B291-B872F629792C</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/stephy/intlChat.git</string>
+	<string>ssh://github.com/osabina/intlChat.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BC53E68C-84BC-42E0-860D-1DE804E44619</string>
+	<string>D294947E-ED53-46E5-B291-B872F629792C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BC53E68C-84BC-42E0-860D-1DE804E44619</string>
+			<string>D294947E-ED53-46E5-B291-B872F629792C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>chat</string>
+			<string>intlChat</string>
 		</dict>
 	</array>
 </dict>

@@ -39,8 +39,4 @@ static Friend *instance;
     return self;
 }
 
-//-(NSArray *)friendsForUser: (User *)user {
-//    
-//    
-//}
 @end

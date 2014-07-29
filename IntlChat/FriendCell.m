@@ -22,4 +22,10 @@
     // Configure the view for the selected state
 }
 
+
+- (IBAction)onChatButton:(id)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickOnCellAtIndex:withData:)]) {
+        [_delegate didClickOnCellAtIndex: _cellIndex withData:@"chat"];
+    }
+}
 @end

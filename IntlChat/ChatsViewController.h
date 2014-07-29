@@ -9,7 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <AFNetworking/UIKit+AFNetworking.h>
 
-@interface ChatsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+#import "User.h"
+#import "Language.h"
+
+
+@interface ChatsViewController : UIViewController <UITableViewDataSource,
+                                                   UITableViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) User *forUser;
+@property (nonatomic, strong) NSArray *chats;
 
 @end

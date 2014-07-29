@@ -7,15 +7,115 @@
 //
 
 #import "Chat.h"
+#import "Message.h"
+
 #import <Parse/PFObject+Subclass.h>
+
+@interface Chat()
+
++ (void)existingChatBetween: (User *) user1 andUser: (User *) user2 withCompletion:(void(^)(Chat *chat))callback;
+
+@end
 
 @implementation Chat
 
-@dynamic user;
+@dynamic chatter;
+@dynamic chattee;
 @dynamic chatName;
 
 
 + (NSString *)parseClassName {
     return @"Chat";
 }
+
++ (void)existingChatBetween:(User *)user1 andUser:(User *)user2 withCompletion:(void (^)(Chat *chat))callback
+{
+    PFQuery *wasChatter = [PFQuery queryWithClassName:@"Chat"];
+    [wasChatter whereKey:@"chatter" equalTo:user1];
+    [wasChatter whereKey:@"chattee" equalTo:user2];
+
+    PFQuery *wasChattee = [PFQuery queryWithClassName:@"Chat"];
+    [wasChatter whereKey:@"chattee" equalTo:user1];
+    [wasChatter whereKey:@"chatter" equalTo:user2];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[wasChatter,wasChattee]];
+    [query includeKey:@"chatter"];
+    [query includeKey:@"chattee"];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            if (object != nil) {
+                NSLog(@"Successfully retrieved chat");
+                callback((Chat *)object);
+            } else {
+                NSLog(@"No existing chat");
+                callback(nil);
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
++ (void)chatBetween:(User *)chatter andUser:(User *)chattee withCompletion:(void (^)(Chat *chat))callback
+{
+    __block Chat *thisChat = nil;
+
+    [Chat existingChatBetween: chatter andUser: chattee
+               withCompletion:^(Chat *chat) {
+                   thisChat = chat;
+               }];
+
+    if (thisChat == nil) {
+        // create new one
+        NSLog(@"Creating new chat between %@ and %@", chatter.username, chattee.username);
+        thisChat = [Chat object];
+        thisChat.chattee = chattee;
+        thisChat.chatter = chatter;
+        thisChat.chatName = @"(unused for now)";
+        [thisChat saveInBackground];
+    } else {
+        NSLog(@"Chat already exists");
+    }
+    callback(thisChat);
+}
+
+- (User *)chatPartner {
+    // Given a Chat, return the user that's not me
+    NSLog( @"chatter: %@ chattee: %@, current: %@", self.chatter, self.chattee, [User currentUser]);
+
+    if ([self.chattee.username isEqualToString:[User currentUser].username]) {
+        NSLog( @"Chattee equal, return chatter");
+        return self.chatter;
+    } else if ([self.chatter.username isEqualToString:[User currentUser].username]) {
+        NSLog( @"Chatter equal, return chattee");
+        return self.chattee;
+    } else {
+        NSLog( @"Neither.  This is fubared!");
+    }
+    return (User *) nil;
+}
+
+- (void)getChatMessagesWithCompletion:(void (^)(NSArray *messages))callback {
+    // This will eventually have to be made smart enough (along with the VC
+    // to handle incremental load.
+    
+    PFQuery *query = [Message query];
+    [query whereKey:@"chat" equalTo:self];
+    [query includeKey:@"chat"];
+    [query includeKey:@"sender"];
+    [query orderByAscending:@"messageSent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded. The first 100 objects are available in objects
+            NSLog(@"Retrieved %d objects:\n%@", objects.count, objects);
+            callback(objects);
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+}
+
 @end

@@ -12,9 +12,6 @@
 
 @implementation User
 
-//@dynamic userid;
-//@dynamic password;
-//@dynamic emailAddr;
 @dynamic language;
 @dynamic fullName;
 @dynamic profileImageURL;
@@ -120,6 +117,29 @@
             NSLog(@"Successfully retrieved %d users.", results.count);
             callback(results);
         } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+-(void)chatsWithCompletion:(void(^)(NSArray *chats))callback {
+
+    PFQuery *wasChatter = [PFQuery queryWithClassName:@"Chat"];
+    [wasChatter whereKey:@"chatter" equalTo:self];
+
+    PFQuery *wasChattee = [PFQuery queryWithClassName:@"Chat"];
+    [wasChattee whereKey:@"chattee" equalTo:self];
+
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[wasChatter,wasChattee]];
+    [query includeKey:@"chatter"];
+    [query includeKey:@"chattee"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d users.", results.count);
+            callback(results);
+         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
