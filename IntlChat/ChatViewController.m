@@ -179,7 +179,7 @@ int const MAX_CALLS = 2;
     [friendCell.messageView addGestureRecognizer:singleFingerTap];
     
     //load cell depending on the user
-    if ([message.sender isEqual: self.currentUser]) {
+    if ([message.sender.username isEqualToString: self.currentUser.username]) {
         return cell;
     } else {
         return friendCell;
@@ -291,7 +291,7 @@ int const MAX_CALLS = 2;
 
 //////calculate cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *messageDetails = self.messages[indexPath.row];
+    Message *message = self.messages[indexPath.row];
     
 //    if ([self cellIsSelected:indexPath]) {
 //        //If our cell is selected, return height with translation
@@ -303,19 +303,19 @@ int const MAX_CALLS = 2;
 
     // Cell isn't selected so return single height
     //load cell depending on the user
-    if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
+    if ([message.sender.username isEqualToString:self.currentUser.username]) {
         //calculate height based on cell
         if (!self.msgCell){
             self.msgCell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
         }
         
         //configure the cell
-        self.msgCell.messageLabel.text = messageDetails[@"translated_message"];
+        self.msgCell.messageLabel.text = message.messageTranslated;
         //layout the cell
         [self.msgCell layoutIfNeeded];
         height = [self.msgCell.contentView systemLayoutSizeFittingSize:(UILayoutFittingCompressedSize)].height;
         //get the height
-        NSLog(@"MESSAGE: %@", messageDetails[@"translated_message"]);
+        NSLog(@"MESSAGE: %@", message.messageTranslated);
         NSLog(@"height: %1.f %d", height, indexPath.row);
 
     } else {
@@ -325,8 +325,8 @@ int const MAX_CALLS = 2;
         }
         
         //configure the cell
-        self.msgFriendCell.messageLabel.text = messageDetails[@"translated_message"];
-        self.msgFriendCell.translationLabel.text = messageDetails[@"original_message"];
+        self.msgFriendCell.messageLabel.text = message.messageTranslated;
+        self.msgFriendCell.translationLabel.text = message.messageOriginal;
         self.msgFriendCell.translationView.hidden = YES;
         //layout the cell
         [self.msgFriendCell layoutIfNeeded];
