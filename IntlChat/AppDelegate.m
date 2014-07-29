@@ -30,12 +30,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    ChatViewController *cvt = [[ChatViewController alloc] init];
-    self.window.rootViewController = cvt;
-//    LoginViewController *lvc = [[LoginViewController alloc] init];
-//    self.window.rootViewController = lvc;
-//    
-//    [self setupParse];
+//    ChatViewController *cvt = [[ChatViewController alloc] init];
+//    self.window.rootViewController = cvt;
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    self.window.rootViewController = lvc;
+    
+    [self setupParse];
     
      self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -71,6 +71,7 @@
 - (IBAction)onFriendsButton:(id)sender {
     FriendsViewController *friends = [[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil];
     [self setTitle:@"Contacts"];
+//    friends.showAllUsers = YES; // hack to add users
     [self.viewContainer addSubview:friends.view];
     [self addChildViewController:friends];
 }

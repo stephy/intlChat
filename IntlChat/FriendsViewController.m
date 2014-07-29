@@ -20,17 +20,21 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        if (self.forUser == nil) {
+            self.forUser = [User currentUser];
+        }
+        
         // Custom initialization
-        self.friendsList = @[ @{@"username": @"Klaus Alves",
-                                @"language": @"Portuguese"},
-                              @{@"username": @"Marissa Mayer",
-                                @"language": @"English"},
-                              @{@"username": @"Jason Statham",
-                                @"language": @"English"},
-                              @{@"username": @"Scarlett Johanson",
-                                @"language": @"English"},
-                              @{@"username": @"Dawson Lery",
-                                @"language": @"English"}];
+//        self.friendsList = @[ @{@"username": @"Klaus Alves",
+//                                @"language": @"Portuguese"},
+//                              @{@"username": @"Marissa Mayer",
+//                                @"language": @"English"},
+//                              @{@"username": @"Jason Statham",
+//                                @"language": @"English"},
+//                              @{@"username": @"Scarlett Johanson",
+//                                @"language": @"English"},
+//                              @{@"username": @"Dawson Lery",
+//                                @"language": @"English"}];
     }
     return self;
 }
@@ -41,6 +45,19 @@
     // Do any additional setup after loading the view from its nib.
     [self.tableview registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:@"FriendCell"];
     self.tableview.rowHeight = 70;
+    if (self.showAllUsers == YES) {
+        NSLog(@"Loading ALL users");
+        [self.forUser allUsersWithCompletion:^(NSArray *friends) {
+            self.friendsList = friends;
+            [self.tableview reloadData];
+        }];
+    } else {
+        NSLog(@"Loading friends");
+        [self.forUser friendsWithCompletion:^(NSArray *friends) {
+            self.friendsList = friends;
+            [self.tableview reloadData];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,22 +74,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    Language *lang = [Language instance];
     FriendCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"FriendCell"];
     self.tableview.backgroundColor =[UIColor clearColor];
     cell.backgroundColor = [UIColor clearColor];
     NSDictionary *friend = self.friendsList[indexPath.row];
-    cell.usernameLabel.text = friend[@"username"];
-    cell.languageLabel.text = friend[@"language"];
+    cell.usernameLabel.text = friend[@"fullName"];
+    cell.languageLabel.text = [lang printableLanguage:friend[@"language"]];
     
     return cell;
 }
 
 //on row click open detailed view
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    ProfileViewController *pvc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
-    
-    [self.navigationController pushViewController:pvc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.showAllUsers == YES) {
+        // We'll use this to add users as friends
+        Friend *new = [Friend object];
+        new.friender = [User currentUser];
+        new.friendee = self.friendsList[indexPath.row];
+        new.accepted = YES;
+        new.friendshipRequested = [NSDate date];
+        new.friendshipStart = [NSDate date];
+        [new saveInBackground];
+    } else {
+        //profile view
+        ProfileViewController *pvc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+        pvc.forUser = self.friendsList[indexPath.row];
+        
+        [self.navigationController pushViewController:pvc animated:YES];
+    }
 }
 
 @end
