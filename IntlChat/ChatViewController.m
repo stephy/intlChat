@@ -58,10 +58,13 @@ int const MAX_CALLS = 2;
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageFriendCell" bundle:nil] forCellReuseIdentifier:@"MessageFriendCell"];
     
     [self.currentChat getChatMessagesWithCompletion:^(NSArray *messages) {
-        NSLog(@"1. Got %d messages:\n %@", messages.count, messages);
-//        [self.messages arrayByAddingObjectsFromArray: messages];
         self.messages = [NSMutableArray arrayWithArray:messages];
         NSLog(@"Got %d messages:\n %@", self.messages.count, self.messages);
+        // Make sure rowShowingTranslation is as long as messages array
+        for (int i=self.rowShowingTranslation.count; i <= self.messages.count; i++) {
+            [self.rowShowingTranslation addObject:@NO];
+        }
+        
         [self.tableView reloadData];
     }];
     
@@ -127,6 +130,7 @@ int const MAX_CALLS = 2;
         new.messageTranslatedLanguage = [self.currentChat chatPartner].language;
         [new saveInBackground];
         [self.messages addObject: new];
+        [self.rowShowingTranslation addObject:@NO];
         [self.tableView reloadData];
         
         //scroll to top
