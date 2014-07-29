@@ -82,7 +82,18 @@
 
 - (User *)chatPartner {
     // Given a Chat, return the user that's not me
-    return (self.chattee == [User currentUser]) ? self.chatter : self.chattee;
+    NSLog( @"chatter: %@ chattee: %@, current: %@", self.chatter, self.chattee, [User currentUser]);
+
+    if ([self.chattee.username isEqualToString:[User currentUser].username]) {
+        NSLog( @"Chattee equal, return chatter");
+        return self.chatter;
+    } else if ([self.chatter.username isEqualToString:[User currentUser].username]) {
+        NSLog( @"Chatter equal, return chattee");
+        return self.chattee;
+    } else {
+        NSLog( @"Neither.  This is fubared!");
+    }
+    return (User *) nil;
 }
 
 - (void)getChatMessagesWithCompletion:(void (^)(NSArray *messages))callback {

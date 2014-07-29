@@ -129,7 +129,7 @@
     [wasChatter whereKey:@"chatter" equalTo:self];
 
     PFQuery *wasChattee = [PFQuery queryWithClassName:@"Chat"];
-    [wasChatter whereKey:@"chattee" equalTo:self];
+    [wasChattee whereKey:@"chattee" equalTo:self];
 
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[wasChatter,wasChattee]];
     [query includeKey:@"chatter"];
