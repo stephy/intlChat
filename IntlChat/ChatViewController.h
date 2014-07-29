@@ -14,7 +14,7 @@
 @interface ChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) NSDictionary *chat;
+//@property (nonatomic, strong) NSDictionary *chat;
 @property (nonatomic, strong) User *currentUser;
 @property (strong, nonatomic) IBOutlet UITextField *messageTextfield;
 @property (nonatomic, strong) NSString *friendUser;

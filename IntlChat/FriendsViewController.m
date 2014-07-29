@@ -102,12 +102,11 @@
     [Chat chatBetween:[User currentUser] andUser:self.friendsList[cellIndex]
                withCompletion:^(Chat *chat) {
                    thisChat = chat;
+                   // initialize and switch to chat view controller
+                   ChatViewController *cvc = [[ChatViewController alloc] init];
+                   cvc.currentChat = thisChat;
+                   [self.navigationController pushViewController:cvc animated:YES];
                }];
-
-    // initialize and switch to chat view controller
-    ChatViewController *cvc = [[ChatViewController alloc] init];
-    cvc.currentChat = thisChat;
-    [self.navigationController pushViewController:cvc animated:YES];
 }
 
 @end

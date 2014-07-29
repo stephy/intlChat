@@ -61,23 +61,25 @@
 {
     __block Chat *thisChat = nil;
 
-    [Chat existingChatBetween: chatter andUser: chattee
-               withCompletion:^(Chat *chat) {
-                   thisChat = chat;
-               }];
-
-    if (thisChat == nil) {
-        // create new one
-        NSLog(@"Creating new chat between %@ and %@", chatter.username, chattee.username);
-        thisChat = [Chat object];
-        thisChat.chattee = chattee;
-        thisChat.chatter = chatter;
-        thisChat.chatName = @"(unused for now)";
-        [thisChat saveInBackground];
-    } else {
-        NSLog(@"Chat already exists");
-    }
-    callback(thisChat);
+    [Chat existingChatBetween: chatter andUser: chattee withCompletion:^(Chat *chat) {
+        thisChat = chat;
+        if (thisChat == nil) {
+            // create new one
+            NSLog(@"Creating new chat between %@ and %@", chatter.username, chattee.username);
+            thisChat = [Chat object];
+            thisChat.chattee = chattee;
+            thisChat.chatter = chatter;
+            thisChat.chatName = @"(unused for now)";
+            // Wow this was a tough bug to find.  Query later was failing if this
+            // had not been saved prior, so we need to "block" on this.
+            [thisChat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                callback(thisChat);
+            }];
+        } else {
+            NSLog(@"Chat already exists");
+            callback(thisChat);
+        }
+    }];
 }
 
 - (User *)chatPartner {
@@ -102,7 +104,6 @@
     
     PFQuery *query = [Message query];
     [query whereKey:@"chat" equalTo:self];
-    [query includeKey:@"chat"];
     [query includeKey:@"sender"];
     [query orderByAscending:@"messageSent"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
