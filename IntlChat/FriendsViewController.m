@@ -7,8 +7,8 @@
 //
 
 #import "FriendsViewController.h"
-#import "FriendCell.h"
 #import "ProfileViewController.h"
+#import "ChatViewController.h"
 
 @interface FriendsViewController ()
 
@@ -82,14 +82,16 @@
     cell.usernameLabel.text = friend[@"fullName"];
     cell.languageLabel.text = [lang printableLanguage:friend[@"language"]];
     
+    cell.delegate = self;
+    cell.cellIndex = indexPath.row;
+    
     return cell;
 }
 
-//on row click open detailed view
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.showAllUsers == YES) {
-        // We'll use this to add users as friends
+        // We'll use this to add users as friends (hack)
         Friend *new = [Friend object];
         new.friender = [User currentUser];
         new.friendee = self.friendsList[indexPath.row];
@@ -98,12 +100,26 @@
         new.friendshipStart = [NSDate date];
         [new saveInBackground];
     } else {
-        //profile view
+        // Normally profile view is shown
         ProfileViewController *pvc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
         pvc.forUser = self.friendsList[indexPath.row];
         
         [self.navigationController pushViewController:pvc animated:YES];
     }
+}
+
+- (void)didClickOnCellAtIndex:(NSInteger)cellIndex withData:(id)data {
+    // Open a chat for friend at cell index, create one if one doesn't already exist.
+    __block Chat *thisChat = nil;
+    [Chat chatBetween:[User currentUser] andUser:self.friendsList[cellIndex]
+               withCompletion:^(Chat *chat) {
+                   thisChat = chat;
+               }];
+
+    // initialize and switch to chat view controller
+    ChatViewController *cvc = [[ChatViewController alloc] init];
+    cvc.currentChat = thisChat;
+    [self.navigationController pushViewController:cvc animated:YES];
 }
 
 @end

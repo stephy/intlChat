@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface ChatCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *friendLabel;
 @property (strong, nonatomic) IBOutlet UILabel *languageLabel;

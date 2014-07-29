@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Chat.h"
 
 @interface ChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) NSDictionary *chat;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) NSDictionary *chat;
 @property (nonatomic, strong) NSString *currentUser; //needs to change to PF USER?
 @property (nonatomic, strong) NSString *friendUser;
+
+@property (strong,nonatomic) Chat *currentChat;
+
 - (IBAction)onSendButton:(id)sender;
+
 @end
