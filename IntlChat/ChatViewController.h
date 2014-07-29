@@ -12,6 +12,7 @@
 @property (nonatomic, strong) NSDictionary *chat;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *currentUser; //needs to change to PF USER?
+@property (strong, nonatomic) IBOutlet UITextField *messageTextfield;
 @property (nonatomic, strong) NSString *friendUser;
 ///- (BOOL)cellIsSelected:(NSIndexPath *)indexPath;
 - (IBAction)onSendButton:(id)sender;

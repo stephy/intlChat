@@ -42,16 +42,16 @@ int const MAX_CALLS = 2;
         
         NSArray *messages = @[ @{ @"username": @"Stephani Alves",
                               @"original_message": @"Oi Tudo bom?",
-                              @"translated_message": @"Hi, how are you? Hi, how are you? Hi, how are you?  It is a diet shake... It is pretty good.. it is supposed to be really good for you. You can read more about it here: Stephani It is a diet shake... It is pretty good.. it is supposed to be really good for you. You can read more about it here:" },
+                              @"translated_message": @"Hi, how are you?" },
                            @{ @"username": @"Bruce Wayne",
                               @"original_message": @"I am doing great, How about you?",
                               @"translated_message": @"I am doing great, How about you?" },
                            @{ @"username": @"Stephani Alves",
-                              @"original_message": @"Eu tive um otimo final de semana Eu tive um otimo final de semana",
+                              @"original_message": @"Eu tive um otimo final de semana",
                               @"translated_message": @"I had a great weekend!" },
                            @{ @"username": @"Stephani Alves",
-                              @"original_message": @"nao",
-                              @"translated_message": @"no" },
+                              @"original_message": @"Eu fui para a praia",
+                              @"translated_message": @"I went to the beach" },
                               ];
         NSArray *rowTranslationSelected = @[@NO, @NO, @NO, @NO];
         self.rowShowingTranslation = [[NSMutableArray alloc] initWithArray:rowTranslationSelected];
@@ -91,6 +91,9 @@ int const MAX_CALLS = 2;
     self.scrollView.contentSize = scrollContentSize;
     
     self.selectedIndexes = [[NSMutableDictionary alloc] init];
+    
+    //set cursor color
+    [[UITextView appearance] setTintColor:[UIColor colorWithRed:1 green:0 blue:0.376 alpha:1] /*#1ad4fd*/];
 }
 
 - (void)viewDidUnload {
@@ -157,6 +160,7 @@ int const MAX_CALLS = 2;
     friendCell.backgroundColor = [UIColor clearColor];
     friendCell.messageLabel.text = messageDetails[@"translated_message"];
     friendCell.translationLabel.text = messageDetails[@"original_message"];
+    friendCell.translationView.hidden = YES;
     
     //add gesture recognizer to message, so user can tap to see translation
 //    UITapGestureRecognizer *singleFingerTap =
@@ -174,72 +178,72 @@ int const MAX_CALLS = 2;
 }
 
 ////The event handling method
-//- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer{
-//    
-//    UIView *tappedView = [recognizer.view hitTest:[recognizer locationInView:recognizer.view] withEvent:nil];
-//    
-//    CGPoint location = [recognizer locationInView:[recognizer.view self]];
-//    
-//
-//    NSIndexPath *currentIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
-//    
-//    //set selected path
-//    self.selectedIndexPath = currentIndexPath;
-//
-//    NSDictionary *message = self.messages[currentIndexPath.row];
-//    if(currentIndexPath != nil){
-//        // remove the cell from tableview
-//        //Do stuff here..
-//        NSLog(@"tapped view # %d", currentIndexPath.row);
-//        NSLog(@"x: %f", location.x);
-//        NSLog(@"y: %f", location.y);
-//        NSLog(@"message %@", message);
-//        MessageFriendCell *selectedCell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
-//        
-//        //check to see if message is showing translation already
-//        if ([self.rowShowingTranslation[currentIndexPath.row]  isEqual: @NO]) {
-//            //show translation
-//            selectedCell.translationView.hidden = NO;
-//            CGRect newFrame = selectedCell.translationView.frame;
-//            newFrame.origin.y += selectedCell.messageView.frame.size.height;    // shift right by 500pts
-//            NSLog(@"click newFrame.origin.y %f", newFrame.origin.y);
-//            [UIView animateWithDuration:0.2
-//                                  delay:0
-//                                options:UIViewAnimationOptionCurveEaseIn
-//                             animations:^{
-//                                 selectedCell.translationView.frame = newFrame;
-//                             }
-//                             completion:^(BOOL finished) {
-//                                 self.rowShowingTranslation[currentIndexPath.row] = @YES;
-//                             }];
-//            
-//            
-//        } else {
-//            //dismiss translation
-//            //remove translation view
-//            NSLog(@"remove tranlation");
-//            CGRect newFrame = selectedCell.translationView.frame;
-//            newFrame.origin.y = selectedCell.messageView.frame.size.height - selectedCell.translationView.frame.size.height;
-//            NSLog(@"unclick newFrame.origin.y %f", newFrame.origin.y);
-//            [UIView animateWithDuration:0.2
-//                                  delay:0
-//                                options:UIViewAnimationOptionCurveEaseIn
-//                             animations:^{
-//                                 selectedCell.translationView.frame = newFrame;
-//                             }
-//                             completion:^(BOOL finished) {
-//                                 selectedCell.translationView.hidden = YES;
-//                                 self.rowShowingTranslation[currentIndexPath.row] = @NO;
-//                             }];
-//            
-//            
-//        }//end else
-//        
-//        
-//    }//end if currentIndexPath !=null
-//    
-//
-//}
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer{
+    
+    UIView *tappedView = [recognizer.view hitTest:[recognizer locationInView:recognizer.view] withEvent:nil];
+    
+    CGPoint location = [recognizer locationInView:[recognizer.view self]];
+    
+
+    NSIndexPath *currentIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
+    
+    //set selected path
+    self.selectedIndexPath = currentIndexPath;
+
+    NSDictionary *message = self.messages[currentIndexPath.row];
+    if(currentIndexPath != nil){
+        // remove the cell from tableview
+        //Do stuff here..
+        NSLog(@"tapped view # %d", currentIndexPath.row);
+        NSLog(@"x: %f", location.x);
+        NSLog(@"y: %f", location.y);
+        NSLog(@"message %@", message);
+        MessageFriendCell *selectedCell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
+        
+        //check to see if message is showing translation already
+        if ([self.rowShowingTranslation[currentIndexPath.row]  isEqual: @NO]) {
+            //show translation
+            selectedCell.translationView.hidden = NO;
+            CGRect newFrame = selectedCell.translationView.frame;
+            newFrame.origin.y += selectedCell.messageView.frame.size.height;    // shift right by 500pts
+            NSLog(@"click newFrame.origin.y %f", newFrame.origin.y);
+            [UIView animateWithDuration:0.2
+                                  delay:0
+                                options:UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                 selectedCell.translationView.frame = newFrame;
+                             }
+                             completion:^(BOOL finished) {
+                                 self.rowShowingTranslation[currentIndexPath.row] = @YES;
+                             }];
+            
+            
+        } else {
+            //dismiss translation
+            //remove translation view
+            NSLog(@"remove tranlation");
+            CGRect newFrame = selectedCell.translationView.frame;
+            newFrame.origin.y = selectedCell.messageView.frame.size.height - selectedCell.translationView.frame.size.height;
+            NSLog(@"unclick newFrame.origin.y %f", newFrame.origin.y);
+            [UIView animateWithDuration:0.2
+                                  delay:0
+                                options:UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                 selectedCell.translationView.frame = newFrame;
+                             }
+                             completion:^(BOOL finished) {
+                                 selectedCell.translationView.hidden = YES;
+                                 self.rowShowingTranslation[currentIndexPath.row] = @NO;
+                             }];
+            
+            
+        }//end else
+        
+        
+    }//end if currentIndexPath !=null
+    
+
+}
 
 //- (BOOL)cellIsSelected:(NSIndexPath *)indexPath {
 //	// Return whether the cell at the specified index path is selected or not
@@ -314,6 +318,7 @@ int const MAX_CALLS = 2;
         //configure the cell
         self.msgFriendCell.messageLabel.text = messageDetails[@"translated_message"];
         self.msgFriendCell.translationLabel.text = messageDetails[@"original_message"];
+        self.msgFriendCell.translationView.hidden = YES;
         //layout the cell
         [self.msgFriendCell layoutIfNeeded];
         
