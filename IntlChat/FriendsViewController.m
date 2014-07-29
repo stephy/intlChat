@@ -23,18 +23,6 @@
         if (self.forUser == nil) {
             self.forUser = [User currentUser];
         }
-        
-        // Custom initialization
-//        self.friendsList = @[ @{@"username": @"Klaus Alves",
-//                                @"language": @"Portuguese"},
-//                              @{@"username": @"Marissa Mayer",
-//                                @"language": @"English"},
-//                              @{@"username": @"Jason Statham",
-//                                @"language": @"English"},
-//                              @{@"username": @"Scarlett Johanson",
-//                                @"language": @"English"},
-//                              @{@"username": @"Dawson Lery",
-//                                @"language": @"English"}];
     }
     return self;
 }

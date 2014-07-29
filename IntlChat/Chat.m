@@ -7,6 +7,8 @@
 //
 
 #import "Chat.h"
+#import "Message.h"
+
 #import <Parse/PFObject+Subclass.h>
 
 @interface Chat()
@@ -81,6 +83,28 @@
 - (User *)chatPartner {
     // Given a Chat, return the user that's not me
     return (self.chattee == [User currentUser]) ? self.chatter : self.chattee;
+}
+
+- (void)getChatMessagesWithCompletion:(void (^)(NSArray *messages))callback {
+    // This will eventually have to be made smart enough (along with the VC
+    // to handle incremental load.
+    
+    PFQuery *query = [Message query];
+    [query whereKey:@"chat" equalTo:self];
+    [query includeKey:@"chat"];
+    [query includeKey:@"sender"];
+    [query orderByAscending:@"messageSent"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded. The first 100 objects are available in objects
+            NSLog(@"Retrieved %d objects:\n%@", objects.count, objects);
+            callback(objects);
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
 }
 
 @end

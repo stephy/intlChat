@@ -22,5 +22,6 @@
 + (void)chatBetween:(User *)chatter andUser:(User *)chattee withCompletion:(void (^)(Chat *chat))callback;
 
 - (User *)chatPartner;
+- (void)getChatMessagesWithCompletion:(void (^)(NSArray *messages))callback;
 
 @end

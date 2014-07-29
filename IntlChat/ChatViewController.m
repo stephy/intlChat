@@ -37,26 +37,13 @@ int const MAX_CALLS = 2;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.currentUser = @"Bruce Wayne";
         // Custom initialization
-        
-        NSArray *messages = @[ @{ @"username": @"Stephani Alves",
-                              @"original_message": @"Oi Tudo bom?",
-                              @"translated_message": @"Hi, how are you?" },
-                           @{ @"username": @"Bruce Wayne",
-                              @"original_message": @"I am doing great, How about you?",
-                              @"translated_message": @"I am doing great, How about you?" },
-                           @{ @"username": @"Stephani Alves",
-                              @"original_message": @"Eu tive um otimo final de semana",
-                              @"translated_message": @"I had a great weekend!" },
-                           @{ @"username": @"Stephani Alves",
-                              @"original_message": @"Eu fui para a praia",
-                              @"translated_message": @"I went to the beach" },
-                              ];
+        self.currentUser = [User currentUser];
+
         NSArray *rowTranslationSelected = @[@NO, @NO, @NO, @NO];
         self.rowShowingTranslation = [[NSMutableArray alloc] initWithArray:rowTranslationSelected];
-        self.messages = [[NSMutableArray alloc] initWithArray:messages];
-                           
+        
+        
     }
     return self;
 }
@@ -69,6 +56,15 @@ int const MAX_CALLS = 2;
     //registration process
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageCell" bundle:nil] forCellReuseIdentifier:@"MessageCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"MessageFriendCell" bundle:nil] forCellReuseIdentifier:@"MessageFriendCell"];
+    
+    [self.currentChat getChatMessagesWithCompletion:^(NSArray *messages) {
+        NSLog(@"1. Got %d messages:\n %@", messages.count, messages);
+//        [self.messages arrayByAddingObjectsFromArray: messages];
+        self.messages = [NSMutableArray arrayWithArray:messages];
+        NSLog(@"Got %d messages:\n %@", self.messages.count, self.messages);
+        [self.tableView reloadData];
+    }];
+    
     
     //send a message every too seconds for testing
 //    NSTimer* myTimer = [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
@@ -109,27 +105,36 @@ int const MAX_CALLS = 2;
 }
 
 
-//create random chat from another person for test purposes
-- (void) onReceiveMessage{
-    [self.messages addObject: @{ @"username": @"Stephani Alves",
-                                 @"original_message": @"Eu tive um otimo final de semana",
-                                 @"translated_message": @"I had a great weekend!" }];
-    [self.tableView reloadData];
-}
+////create random chat from another person for test purposes
+//- (void) onReceiveMessage{
+//    [self.messages addObject: @{ @"username": @"Stephani Alves",
+//                                 @"original_message": @"Eu tive um otimo final de semana",
+//                                 @"translated_message": @"I had a great weekend!" }];
+//    [self.tableView reloadData];
+//}
 
 - (IBAction)onSendButton:(id)sender {
-    NSLog(@"send %@", self.messageField.text);
-    [self.messages addObject:@{ @"username": @"Bruce Wayne",
-                                @"original_message": self.messageField.text ,
-                                @"translated_message": self.messageField.text }];
-    [self.tableView reloadData];
-
-    //scroll to top
-    [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + 20) animated:YES];
-    
-    //clear textbox
-    self.messageField.text =@"";
-    
+    if (! [self.messageField.text isEqualToString:@""]) {
+        // Only send if there's something other than blank text
+        NSLog(@"send %@", self.messageField.text);
+        Message *new = [Message object];
+        new.sender = self.currentUser;
+        new.chat = self.currentChat;
+        new.messageSent = [NSDate date];
+        new.messageOriginal = self.messageField.text;
+        new.messageTranslated = self.messageField.text;
+        new.messageOriginalLanguage = self.currentUser.language;
+        new.messageTranslatedLanguage = [self.currentChat chatPartner].language;
+        [new saveInBackground];
+        [self.messages addObject: new];
+        [self.tableView reloadData];
+        
+        //scroll to top
+        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + 20) animated:YES];
+        
+        //clear textbox
+        self.messageField.text =@"";
+    }
 }
 
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -140,7 +145,7 @@ int const MAX_CALLS = 2;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *messageDetails = self.messages[indexPath.row];
+    Message *message = self.messages[indexPath.row];
     self.tableView.backgroundColor =[UIColor clearColor];
     
     //current user cell
@@ -149,7 +154,7 @@ int const MAX_CALLS = 2;
     //this will prevent the cell to highlight for a bit before the will select returns
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-    cell.messageLabel.text = messageDetails[@"translated_message"];
+    cell.messageLabel.text = message.messageTranslated;
     
     // friend cell settings
     MessageFriendCell *friendCell = [tableView dequeueReusableCellWithIdentifier:@"MessageFriendCell"];
@@ -158,8 +163,8 @@ int const MAX_CALLS = 2;
     //this will prevent the cell to highlight for a bit before the will select returns nil
     friendCell.selectionStyle = UITableViewCellSelectionStyleNone;
     friendCell.backgroundColor = [UIColor clearColor];
-    friendCell.messageLabel.text = messageDetails[@"translated_message"];
-    friendCell.translationLabel.text = messageDetails[@"original_message"];
+    friendCell.messageLabel.text = message.messageTranslated;
+    friendCell.translationLabel.text = message.messageOriginal;
     friendCell.translationView.hidden = YES;
     
     //add gesture recognizer to message, so user can tap to see translation
@@ -170,7 +175,7 @@ int const MAX_CALLS = 2;
     [friendCell.messageView addGestureRecognizer:singleFingerTap];
     
     //load cell depending on the user
-    if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
+    if ([message.sender isEqual: self.currentUser]) {
         return cell;
     } else {
         return friendCell;

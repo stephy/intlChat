@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Chat.h"
+#import "Message.h"
+#import "User.h"
 
 @interface ChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSDictionary *chat;
-@property (nonatomic, strong) NSString *currentUser; //needs to change to PF USER?
+@property (nonatomic, strong) User *currentUser;
 @property (strong, nonatomic) IBOutlet UITextField *messageTextfield;
 @property (nonatomic, strong) NSString *friendUser;
 

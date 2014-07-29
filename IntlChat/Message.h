@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Chat.h"
 #import "User.h"
+#import "Chat.h"
 
 @interface Message : PFObject<PFSubclassing>
 
-@property (retain) Chat *chat;
 @property (retain) User *sender;
+@property (retain) Chat *chat;
 @property (retain) NSDate *messageSent;
 @property (retain) NSString *messageOriginal;
 @property (retain) NSString *messageTranslated;
