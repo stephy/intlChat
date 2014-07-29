@@ -163,11 +163,11 @@ int const MAX_CALLS = 2;
     friendCell.translationView.hidden = YES;
     
     //add gesture recognizer to message, so user can tap to see translation
-//    UITapGestureRecognizer *singleFingerTap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(handleSingleTap:)];
-//    
-//    [friendCell.messageView addGestureRecognizer:singleFingerTap];
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    
+    [friendCell.messageView addGestureRecognizer:singleFingerTap];
     
     //load cell depending on the user
     if ([messageDetails[@"username"] isEqualToString:self.currentUser]) {
@@ -205,7 +205,7 @@ int const MAX_CALLS = 2;
             //show translation
             selectedCell.translationView.hidden = NO;
             CGRect newFrame = selectedCell.translationView.frame;
-            newFrame.origin.y += selectedCell.messageView.frame.size.height;    // shift right by 500pts
+            newFrame.origin.y = selectedCell.messageView.frame.size.height;    // shift right by 500pts
             NSLog(@"click newFrame.origin.y %f", newFrame.origin.y);
             [UIView animateWithDuration:0.2
                                   delay:0
