@@ -11,6 +11,8 @@
 #import "MessageViewController.h"
 #import "MessageFriendCell.h"
 
+#import "TranslateClient.h"
+
 int const MESSAGE_BAR_OFFSET = 8;
 int const MAX_CALLS = 2;
 
@@ -119,25 +121,57 @@ int const MAX_CALLS = 2;
 - (IBAction)onSendButton:(id)sender {
     if (! [self.messageField.text isEqualToString:@""]) {
         // Only send if there's something other than blank text
+        // ALSO: this should really be abstracted into the model code
+        //       for message...
+        
         NSLog(@"send %@", self.messageField.text);
+
         Message *new = [Message object];
+
         new.sender = self.currentUser;
         new.chat = self.currentChat;
         new.messageSent = [NSDate date];
-        new.messageOriginal = self.messageField.text;
-        new.messageTranslated = self.messageField.text;
         new.messageOriginalLanguage = self.currentUser.language;
         new.messageTranslatedLanguage = [self.currentChat chatPartner].language;
-        [new saveInBackground];
-        [self.messages addObject: new];
-        [self.rowShowingTranslation addObject:@NO];
-        [self.tableView reloadData];
-        
-        //scroll to top
-        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + 20) animated:YES];
-        
-        //clear textbox
-        self.messageField.text =@"";
+        new.messageOriginal = self.messageField.text;
+
+        if ([self.currentUser.language isEqualToString:
+             [self.currentChat chatPartner].language]) {
+            new.messageTranslated = self.messageField.text;
+        } else {
+            TranslateClient *tr = [TranslateClient instance];
+            [tr getTranslationForString:self.messageField.text
+                               fromLang:self.currentUser.language
+                                 toLang:[self.currentChat chatPartner].language
+                            withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                // Assuming we got a string back...
+                                new.messageTranslated = responseObject;
+                                [new saveInBackground];
+                                [self.messages addObject: new];
+                                [self.rowShowingTranslation addObject:@NO];
+                                [self.tableView reloadData];
+                                
+                                //scroll to top
+                                [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + 20) animated:YES];
+                                
+                                //clear textbox
+                                self.messageField.text =@"";
+
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                // have to stick with what we have
+                                new.messageTranslated = new.messageOriginal;
+                                [new saveInBackground];
+                                [self.messages addObject: new];
+                                [self.rowShowingTranslation addObject:@NO];
+                                [self.tableView reloadData];
+                                
+                                //scroll to top
+                                [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + 20) animated:YES];
+                                
+                                //clear textbox
+                                self.messageField.text =@"";
+                            }];
+        }
     }
 }
 
